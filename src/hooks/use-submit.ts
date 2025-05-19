@@ -1,9 +1,9 @@
 import { type FormEvent, useTransition } from 'react';
+import { useRouter } from '@tanstack/react-router';
 import { type UseFormHandleSubmit } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { MESSAGES } from '@/lib/constants';
-// import { revalidateLiveQueries } from '@/lib/live-queries';
 import type { Callback } from '@/lib/types';
 import { capitalizeFirstLetter } from '@/lib/utils';
 
@@ -20,6 +20,7 @@ interface Payload {
 }
 
 export function useSubmit(options: Options): Payload {
+  const router = useRouter();
   const [pending, startTransition] = useTransition();
   const { callbacks, handleSubmit, submitFn, successMessage = '' } = options;
 
@@ -27,7 +28,7 @@ export function useSubmit(options: Options): Payload {
     startTransition(async () => {
       try {
         await submitFn(data);
-        // await revalidateLiveQueries();
+        router.invalidate();
 
         callbacks?.forEach((c) => {
           c();

@@ -12,6 +12,8 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SongsImport } from './routes/songs'
+import { Route as SignoutImport } from './routes/signout'
+import { Route as SigninImport } from './routes/signin'
 import { Route as ReleasesImport } from './routes/releases'
 import { Route as PlaylistImport } from './routes/playlist'
 import { Route as ArtistsImport } from './routes/artists'
@@ -23,6 +25,18 @@ import { Route as IndexImport } from './routes/index'
 const SongsRoute = SongsImport.update({
   id: '/songs',
   path: '/songs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SignoutRoute = SignoutImport.update({
+  id: '/signout',
+  path: '/signout',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SigninRoute = SigninImport.update({
+  id: '/signin',
+  path: '/signin',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -95,6 +109,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReleasesImport
       parentRoute: typeof rootRoute
     }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninImport
+      parentRoute: typeof rootRoute
+    }
+    '/signout': {
+      id: '/signout'
+      path: '/signout'
+      fullPath: '/signout'
+      preLoaderRoute: typeof SignoutImport
+      parentRoute: typeof rootRoute
+    }
     '/songs': {
       id: '/songs'
       path: '/songs'
@@ -113,6 +141,8 @@ export interface FileRoutesByFullPath {
   '/artists': typeof ArtistsRoute
   '/playlist': typeof PlaylistRoute
   '/releases': typeof ReleasesRoute
+  '/signin': typeof SigninRoute
+  '/signout': typeof SignoutRoute
   '/songs': typeof SongsRoute
 }
 
@@ -122,6 +152,8 @@ export interface FileRoutesByTo {
   '/artists': typeof ArtistsRoute
   '/playlist': typeof PlaylistRoute
   '/releases': typeof ReleasesRoute
+  '/signin': typeof SigninRoute
+  '/signout': typeof SignoutRoute
   '/songs': typeof SongsRoute
 }
 
@@ -132,14 +164,32 @@ export interface FileRoutesById {
   '/artists': typeof ArtistsRoute
   '/playlist': typeof PlaylistRoute
   '/releases': typeof ReleasesRoute
+  '/signin': typeof SigninRoute
+  '/signout': typeof SignoutRoute
   '/songs': typeof SongsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/albums' | '/artists' | '/playlist' | '/releases' | '/songs'
+  fullPaths:
+    | '/'
+    | '/albums'
+    | '/artists'
+    | '/playlist'
+    | '/releases'
+    | '/signin'
+    | '/signout'
+    | '/songs'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/albums' | '/artists' | '/playlist' | '/releases' | '/songs'
+  to:
+    | '/'
+    | '/albums'
+    | '/artists'
+    | '/playlist'
+    | '/releases'
+    | '/signin'
+    | '/signout'
+    | '/songs'
   id:
     | '__root__'
     | '/'
@@ -147,6 +197,8 @@ export interface FileRouteTypes {
     | '/artists'
     | '/playlist'
     | '/releases'
+    | '/signin'
+    | '/signout'
     | '/songs'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +209,8 @@ export interface RootRouteChildren {
   ArtistsRoute: typeof ArtistsRoute
   PlaylistRoute: typeof PlaylistRoute
   ReleasesRoute: typeof ReleasesRoute
+  SigninRoute: typeof SigninRoute
+  SignoutRoute: typeof SignoutRoute
   SongsRoute: typeof SongsRoute
 }
 
@@ -166,6 +220,8 @@ const rootRouteChildren: RootRouteChildren = {
   ArtistsRoute: ArtistsRoute,
   PlaylistRoute: PlaylistRoute,
   ReleasesRoute: ReleasesRoute,
+  SigninRoute: SigninRoute,
+  SignoutRoute: SignoutRoute,
   SongsRoute: SongsRoute,
 }
 
@@ -184,6 +240,8 @@ export const routeTree = rootRoute
         "/artists",
         "/playlist",
         "/releases",
+        "/signin",
+        "/signout",
         "/songs"
       ]
     },
@@ -201,6 +259,12 @@ export const routeTree = rootRoute
     },
     "/releases": {
       "filePath": "releases.tsx"
+    },
+    "/signin": {
+      "filePath": "signin.tsx"
+    },
+    "/signout": {
+      "filePath": "signout.tsx"
     },
     "/songs": {
       "filePath": "songs.tsx"

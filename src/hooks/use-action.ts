@@ -1,8 +1,8 @@
 import { useActionState } from 'react';
+import { useRouter } from '@tanstack/react-router';
 import { toast } from 'sonner';
 
 import { MESSAGES } from '@/lib/constants';
-// import { revalidateLiveQueries } from '@/lib/live-queries';
 import type { Callback } from '@/lib/types';
 import { capitalizeFirstLetter } from '@/lib/utils';
 
@@ -21,10 +21,11 @@ export function useAction({
   submitFn,
   successMessage,
 }: Options) {
+  const router = useRouter();
   const [state, action, pending] = useActionState(async () => {
     try {
       await submitFn();
-      // await revalidateLiveQueries();
+      router.invalidate();
 
       callbacks?.forEach((c) => {
         c();
