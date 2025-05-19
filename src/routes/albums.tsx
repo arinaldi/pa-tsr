@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { Pencil } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -13,11 +13,10 @@ import TopLink from '@/components/top-link';
 import { useSession } from '@/components/session-provider';
 import { ROUTE_HREF, SPOTIFY_URL } from '@/lib/constants';
 import { capitalizeFirstLetter } from '@/lib/utils';
-import { getFavorites } from '@/supabase/data'
-import DecadeLink from './-decade-link';
+import { getFavorites } from '@/supabase/data';
+import DecadeLink from './albums/-decade-link';
 
-
-export const Route = createFileRoute('/albums/')({
+export const Route = createFileRoute('/albums')({
   component: TopAlbums,
   loader: async () => {
     const data = await getFavorites();
@@ -26,11 +25,11 @@ export const Route = createFileRoute('/albums/')({
       ...data,
       title: 'New releases',
     };
-  }
-})
+  },
+});
 
 function TopAlbums() {
-  const { favorites } = Route.useLoaderData()
+  const { favorites } = Route.useLoaderData();
   const session = useSession();
 
   return (

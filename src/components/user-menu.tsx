@@ -141,7 +141,7 @@ export default function UserMenu() {
             ) : (
               <DropdownMenuItem
                 onSelect={() => {
-                  setOpenMobile(false);  
+                  setOpenMobile(false);
                   navigate({ to: ROUTE_HREF.SIGNIN });
                 }}
               >

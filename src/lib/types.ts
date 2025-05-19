@@ -1,4 +1,8 @@
-import type { ForwardRefExoticComponent, ReactNode, SVGAttributes } from 'react';
+import type {
+  ForwardRefExoticComponent,
+  ReactNode,
+  SVGAttributes,
+} from 'react';
 
 import type { Database } from '@/supabase/db-types';
 
