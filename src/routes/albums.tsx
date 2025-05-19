@@ -23,7 +23,7 @@ export const Route = createFileRoute('/albums')({
 
     return {
       ...data,
-      title: 'New releases',
+      title: 'Top albums',
     };
   },
 });
