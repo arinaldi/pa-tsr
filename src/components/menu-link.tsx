@@ -22,7 +22,6 @@ export default function MenuLink({ route }: Props) {
   const pathMatch = pathname === href;
   const active = items ? pathMatch : pathname.startsWith(href);
   const parentActive = items ? pathMatch : true;
-  let isActive = false;
 
   function closeMobile() {
     setOpenMobile(false);
