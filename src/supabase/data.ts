@@ -1,5 +1,3 @@
-// TODO: loader fn args
-
 import {
   type AllTimeListItem,
   formatFavorites,
@@ -9,8 +7,9 @@ import {
   formatSongs,
 } from '@/lib/formatters';
 import { supabase } from '@/supabase/client';
-import { MESSAGES, SORT_DIRECTION } from '@/lib/constants';
+import { MESSAGES, PER_PAGE, SORT_DIRECTION } from '@/lib/constants';
 import { parseAdminQuery } from '@/lib/utils';
+import type { AdminSearch } from '@/routes/admin/-schema';
 
 const { ASC, DESC } = SORT_DIRECTION;
 
@@ -30,16 +29,15 @@ export async function getAlbum({ params }: any) {
   return { album };
 }
 
-async function getAlbums({ request }: any) {
-  const url = new URL(request.url);
-  const params = new URLSearchParams(url.search);
-  const searchParams = Object.fromEntries(params.entries());
-  const { cd, favorite, page, perPage, search, sort, studio, wishlist } =
-    parseAdminQuery(searchParams);
-  const [sortProp, desc] = sort.split(':') ?? [];
+async function getAlbums(searchParams: AdminSearch) {
+  const { cd, favorite, sort, studio, wishlist } = searchParams;
+  const page = searchParams.page ?? 1;
+  const perPage = searchParams.perPage ?? PER_PAGE.SMALL;
+  const [sortProp, desc] = sort?.split(':') ?? [];
   const direction = desc ? DESC : ASC;
   const start = (page - 1) * perPage;
   const end = page * perPage - 1;
+  const search = searchParams.search ?? '';
   const searchTerm = `%${search}%`;
 
   let query = supabase
@@ -48,20 +46,20 @@ async function getAlbums({ request }: any) {
     .or(`artist.ilike.${searchTerm}, title.ilike.${searchTerm}`)
     .range(start, end);
 
-  if (cd) {
-    query = query.eq('cd', cd === 'true');
+  if (cd !== undefined) {
+    query = query.eq('cd', cd);
   }
 
-  if (favorite) {
-    query = query.eq('favorite', favorite === 'true');
+  if (favorite !== undefined) {
+    query = query.eq('favorite', favorite);
   }
 
-  if (studio) {
-    query = query.eq('studio', studio === 'true');
+  if (studio !== undefined) {
+    query = query.eq('studio', studio);
   }
 
-  if (wishlist) {
-    query = query.eq('wishlist', wishlist === 'true');
+  if (wishlist !== undefined) {
+    query = query.eq('wishlist', wishlist);
   }
 
   if (sortProp) {
@@ -88,11 +86,9 @@ async function getAlbums({ request }: any) {
   };
 }
 
-async function getCdCount({ request }: any) {
-  const url = new URL(request.url);
-  const params = new URLSearchParams(url.search);
-  const searchParams = Object.fromEntries(params.entries());
-  const { cd, search, studio } = parseAdminQuery(searchParams);
+async function getCdCount(searchParams: AdminSearch) {
+  const { cd, favorite, studio, wishlist } = searchParams;
+  const search = searchParams.search ?? '';
   const searchTerm = `%${search}%`;
 
   let query = supabase
@@ -101,13 +97,21 @@ async function getCdCount({ request }: any) {
     .eq('cd', true)
     .or(`artist.ilike.${searchTerm}, title.ilike.${searchTerm}`);
 
-  if (cd) {
-    query = query.eq('cd', cd === 'true');
-  }
-
-  if (studio) {
-    query = query.eq('studio', studio === 'true');
-  }
+    if (cd !== undefined) {
+      query = query.eq('cd', cd);
+    }
+  
+    if (favorite !== undefined) {
+      query = query.eq('favorite', favorite);
+    }
+  
+    if (studio !== undefined) {
+      query = query.eq('studio', studio);
+    }
+  
+    if (wishlist !== undefined) {
+      query = query.eq('wishlist', wishlist);
+    }
 
   const { count, error } = await query;
 
@@ -116,10 +120,10 @@ async function getCdCount({ request }: any) {
   return count ?? 0;
 }
 
-export async function getAdminData(args: any) {
+export async function getAdminData(searchParams: AdminSearch) {
   const [{ albums, count }, cdCount] = await Promise.all([
-    getAlbums(args),
-    getCdCount(args),
+    getAlbums(searchParams),
+    getCdCount(searchParams),
   ]);
 
   return {

@@ -16,8 +16,10 @@ import { Route as SignoutImport } from './routes/signout'
 import { Route as SigninImport } from './routes/signin'
 import { Route as ReleasesImport } from './routes/releases'
 import { Route as PlaylistImport } from './routes/playlist'
+import { Route as NotFoundImport } from './routes/not-found'
 import { Route as ArtistsImport } from './routes/artists'
 import { Route as AlbumsImport } from './routes/albums'
+import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
@@ -52,6 +54,12 @@ const PlaylistRoute = PlaylistImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const NotFoundRoute = NotFoundImport.update({
+  id: '/not-found',
+  path: '/not-found',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ArtistsRoute = ArtistsImport.update({
   id: '/artists',
   path: '/artists',
@@ -61,6 +69,12 @@ const ArtistsRoute = ArtistsImport.update({
 const AlbumsRoute = AlbumsImport.update({
   id: '/albums',
   path: '/albums',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminRoute = AdminImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -81,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminImport
+      parentRoute: typeof rootRoute
+    }
     '/albums': {
       id: '/albums'
       path: '/albums'
@@ -93,6 +114,13 @@ declare module '@tanstack/react-router' {
       path: '/artists'
       fullPath: '/artists'
       preLoaderRoute: typeof ArtistsImport
+      parentRoute: typeof rootRoute
+    }
+    '/not-found': {
+      id: '/not-found'
+      path: '/not-found'
+      fullPath: '/not-found'
+      preLoaderRoute: typeof NotFoundImport
       parentRoute: typeof rootRoute
     }
     '/playlist': {
@@ -137,8 +165,10 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/albums': typeof AlbumsRoute
   '/artists': typeof ArtistsRoute
+  '/not-found': typeof NotFoundRoute
   '/playlist': typeof PlaylistRoute
   '/releases': typeof ReleasesRoute
   '/signin': typeof SigninRoute
@@ -148,8 +178,10 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/albums': typeof AlbumsRoute
   '/artists': typeof ArtistsRoute
+  '/not-found': typeof NotFoundRoute
   '/playlist': typeof PlaylistRoute
   '/releases': typeof ReleasesRoute
   '/signin': typeof SigninRoute
@@ -160,8 +192,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/albums': typeof AlbumsRoute
   '/artists': typeof ArtistsRoute
+  '/not-found': typeof NotFoundRoute
   '/playlist': typeof PlaylistRoute
   '/releases': typeof ReleasesRoute
   '/signin': typeof SigninRoute
@@ -173,8 +207,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/albums'
     | '/artists'
+    | '/not-found'
     | '/playlist'
     | '/releases'
     | '/signin'
@@ -183,8 +219,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/albums'
     | '/artists'
+    | '/not-found'
     | '/playlist'
     | '/releases'
     | '/signin'
@@ -193,8 +231,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/albums'
     | '/artists'
+    | '/not-found'
     | '/playlist'
     | '/releases'
     | '/signin'
@@ -205,8 +245,10 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AlbumsRoute: typeof AlbumsRoute
   ArtistsRoute: typeof ArtistsRoute
+  NotFoundRoute: typeof NotFoundRoute
   PlaylistRoute: typeof PlaylistRoute
   ReleasesRoute: typeof ReleasesRoute
   SigninRoute: typeof SigninRoute
@@ -216,8 +258,10 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AlbumsRoute: AlbumsRoute,
   ArtistsRoute: ArtistsRoute,
+  NotFoundRoute: NotFoundRoute,
   PlaylistRoute: PlaylistRoute,
   ReleasesRoute: ReleasesRoute,
   SigninRoute: SigninRoute,
@@ -236,8 +280,10 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/admin",
         "/albums",
         "/artists",
+        "/not-found",
         "/playlist",
         "/releases",
         "/signin",
@@ -248,11 +294,17 @@ export const routeTree = rootRoute
     "/": {
       "filePath": "index.tsx"
     },
+    "/admin": {
+      "filePath": "admin.tsx"
+    },
     "/albums": {
       "filePath": "albums.tsx"
     },
     "/artists": {
       "filePath": "artists.tsx"
+    },
+    "/not-found": {
+      "filePath": "not-found.tsx"
     },
     "/playlist": {
       "filePath": "playlist.tsx"
