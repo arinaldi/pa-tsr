@@ -45,7 +45,7 @@ export default function SongActions({ song }: Props) {
     >
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <Button className="-mt-1 size-8 shrink-0 p-0" variant="ghost">
+          <Button className="size-6 shrink-0" variant="ghost">
             <span className="sr-only">Open menu</span>
             <EllipsisVertical className="size-4" />
           </Button>

@@ -36,17 +36,17 @@ function NewReleases() {
                   {data.length.toLocaleString()}
                 </Badge>
               </h2>
-              <ul className="mt-2 space-y-2 text-sm">
+              <ul className="text-sm">
                 {data.map((r, i) => (
                   <li
                     key={r.id}
                     className={cn(
-                      'grid grid-cols-2 gap-2 px-3 py-1 sm:grid-cols-[1fr_2fr]',
+                      'grid grid-cols-2 gap-2 p-3 sm:grid-cols-[1fr_2fr]',
                       i < data.length - 1 && 'border-b',
                     )}
                   >
                     <span className="text-muted-foreground">{r.artist}</span>
-                    <span className="flex items-start gap-2">
+                    <span className="flex items-center gap-2">
                       {r.title}
                       <ReleaseActions release={r} />
                     </span>
