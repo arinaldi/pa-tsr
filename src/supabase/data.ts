@@ -7,21 +7,16 @@ import {
   formatSongs,
 } from '@/lib/formatters';
 import { supabase } from '@/supabase/client';
-import { MESSAGES, PER_PAGE, SORT_DIRECTION } from '@/lib/constants';
-import { parseAdminQuery } from '@/lib/utils';
+import { PER_PAGE, SORT_DIRECTION } from '@/lib/constants';
 import type { AdminSearch } from '@/routes/admin/-schema';
 
 const { ASC, DESC } = SORT_DIRECTION;
 
-export async function getAlbum({ params }: any) {
-  if (!params.id) {
-    throw new Error(MESSAGES.NO_DATA);
-  }
-
+export async function getAlbum(id: string) {
   const { data: album, error } = await supabase
     .from('albums')
     .select('*')
-    .eq('id', parseInt(params.id, 10))
+    .eq('id', parseInt(id, 10))
     .single();
 
   if (error) throw new Error(error.message);
@@ -160,12 +155,9 @@ export async function getAllTimeRankings() {
   };
 }
 
-export async function getCandidates({ request }: any) {
-  const url = new URL(request.url);
-  const params = new URLSearchParams(url.search);
-  const searchParams = Object.fromEntries(params.entries());
-  const { search, sort } = parseAdminQuery(searchParams);
-  const [sortProp, desc] = sort.split(':') ?? [];
+export async function getCandidates(searchParams: any) {
+  const search = searchParams.search ?? '';
+  const [sortProp, desc] = searchParams.sort?.split(':') ?? [];
   const direction = desc ? DESC : ASC;
   const searchTerm = `%${search}%`;
   let candidates: AllTimeListItem[] = [];

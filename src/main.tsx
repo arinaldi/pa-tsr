@@ -7,12 +7,13 @@ import { routeTree } from './routeTree.gen';
 import './styles.css';
 
 const router = createRouter({
-  routeTree,
   context: {},
   defaultPreload: 'intent',
-  scrollRestoration: true,
-  defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
+  defaultStructuralSharing: true,
+  routeTree,
+  scrollRestoration: true,
+  trailingSlash: 'never'
 });
 
 declare module '@tanstack/react-router' {

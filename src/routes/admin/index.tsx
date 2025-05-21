@@ -15,17 +15,17 @@ import { ROUTES_ADMIN } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { validateSession } from '@/supabase/client';
 import { getAdminData } from '@/supabase/data';
-import { adminSearchSchema } from './admin/-schema';
-import AlbumActions from './admin/-album-actions';
-import DataEmptyPlaceholder from './admin/-data-empty-placeholder';
-import FacetedFilter from './admin/-faceted-filter';
-import Paginate from './admin/-paginate';
-import ResetFilters from './admin/-reset-filters';
-import Search from './admin/-search';
-import SortableColumn from './admin/-sortable-column';
-import TableLink from './admin/-table-link';
+import { adminSearchSchema } from './-schema';
+import AlbumActions from './-album-actions';
+import DataEmptyPlaceholder from './-data-empty-placeholder';
+import FacetedFilter from './-faceted-filter';
+import Paginate from './-paginate';
+import ResetFilters from './-reset-filters';
+import Search from './-search';
+import SortableColumn from './-sortable-column';
+import TableLink from './-table-link';
 
-export const Route = createFileRoute('/admin')({
+export const Route = createFileRoute('/admin/')({
   validateSearch: adminSearchSchema,
   component: Admin,
   loaderDeps: ({ search }) => ({ search}),

@@ -14,7 +14,7 @@ import {
   PaginationItem,
 } from '@/components/ui/pagination';
 import { PER_PAGE } from '@/lib/constants';
-import { Route } from '../admin';
+import { Route } from '.';
 import PerPage from './-per-page';
 
 interface Props {

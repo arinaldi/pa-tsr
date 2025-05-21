@@ -4,10 +4,10 @@ import { Badge } from '@/components/ui/badge';
 import { sortReleases } from '@/lib/formatters';
 import { cn } from '@/lib/utils';
 import { getReleases } from '@/supabase/data';
-import AddReleaseModal from './releases/-add-release-modal';
-import ReleaseActions from './releases/-release-actions';
+import AddReleaseModal from './-add-release-modal';
+import ReleaseActions from './-release-actions';
 
-export const Route = createFileRoute('/releases')({
+export const Route = createFileRoute('/releases/')({
   component: NewReleases,
   loader: async () => {
     const data = await getReleases();

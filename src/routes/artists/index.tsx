@@ -18,10 +18,10 @@ import {
   getArtistId,
   sortByDateDesc,
   type Result,
-} from './artists/-helpers';
-import Random from './artists/-random';
+} from './-helpers';
+import Random from './-random';
 
-export const Route = createFileRoute('/artists')({
+export const Route = createFileRoute('/artists/')({
   component: Artists,
   loader: async () => {
     const data = await getArtists();

@@ -3,12 +3,12 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { ROUTES_ADMIN } from '@/lib/constants';
 import { supabase } from '@/supabase/client';
-import EmailForm from './signin/-email-form';
-import OtpForm from './signin/-otp-form';
-import PasswordForm from './signin/-password-form';
-import { emailSchema } from './signin/-schema';
+import EmailForm from './-email-form';
+import OtpForm from './-otp-form';
+import PasswordForm from './-password-form';
+import { emailSchema } from './-schema';
 
-export const Route = createFileRoute('/signin')({
+export const Route = createFileRoute('/signin/')({
   component: Signin,
   loader: async () => {
     const {

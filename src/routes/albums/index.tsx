@@ -14,9 +14,9 @@ import { useSession } from '@/components/session-provider';
 import { ROUTE_HREF, SPOTIFY_URL } from '@/lib/constants';
 import { capitalizeFirstLetter } from '@/lib/utils';
 import { getFavorites } from '@/supabase/data';
-import DecadeLink from './albums/-decade-link';
+import DecadeLink from './-decade-link';
 
-export const Route = createFileRoute('/albums')({
+export const Route = createFileRoute('/albums/')({
   component: TopAlbums,
   loader: async () => {
     const data = await getFavorites();

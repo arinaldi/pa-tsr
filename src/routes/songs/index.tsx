@@ -2,11 +2,11 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import TopLink from '@/components/top-link';
 import { getSongs } from '@/supabase/data';
-import AddSongModal from './songs/-add-song-modal';
-import LetterLink from './songs/-letter-link';
-import SongActions from './songs/-song-actions';
+import AddSongModal from './-add-song-modal';
+import LetterLink from './-letter-link';
+import SongActions from './-song-actions';
 
-export const Route = createFileRoute('/songs')({
+export const Route = createFileRoute('/songs/')({
   component: FeaturedSongs,
   loader: async () => {
     const data = await getSongs();

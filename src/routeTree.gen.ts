@@ -11,46 +11,24 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as SongsImport } from './routes/songs'
 import { Route as SignoutImport } from './routes/signout'
-import { Route as SigninImport } from './routes/signin'
-import { Route as ReleasesImport } from './routes/releases'
-import { Route as PlaylistImport } from './routes/playlist'
 import { Route as NotFoundImport } from './routes/not-found'
-import { Route as ArtistsImport } from './routes/artists'
-import { Route as AlbumsImport } from './routes/albums'
-import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
+import { Route as SongsIndexImport } from './routes/songs/index'
+import { Route as SigninIndexImport } from './routes/signin/index'
+import { Route as ReleasesIndexImport } from './routes/releases/index'
+import { Route as PlaylistIndexImport } from './routes/playlist/index'
+import { Route as ArtistsIndexImport } from './routes/artists/index'
+import { Route as AlbumsIndexImport } from './routes/albums/index'
+import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as AdminAddImport } from './routes/admin/add'
+import { Route as AdminEditAlbumIdImport } from './routes/admin/edit/$albumId'
 
 // Create/Update Routes
-
-const SongsRoute = SongsImport.update({
-  id: '/songs',
-  path: '/songs',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const SignoutRoute = SignoutImport.update({
   id: '/signout',
   path: '/signout',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const SigninRoute = SigninImport.update({
-  id: '/signin',
-  path: '/signin',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ReleasesRoute = ReleasesImport.update({
-  id: '/releases',
-  path: '/releases',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const PlaylistRoute = PlaylistImport.update({
-  id: '/playlist',
-  path: '/playlist',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,27 +38,63 @@ const NotFoundRoute = NotFoundImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ArtistsRoute = ArtistsImport.update({
-  id: '/artists',
-  path: '/artists',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AlbumsRoute = AlbumsImport.update({
-  id: '/albums',
-  path: '/albums',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AdminRoute = AdminImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SongsIndexRoute = SongsIndexImport.update({
+  id: '/songs/',
+  path: '/songs/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SigninIndexRoute = SigninIndexImport.update({
+  id: '/signin/',
+  path: '/signin/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReleasesIndexRoute = ReleasesIndexImport.update({
+  id: '/releases/',
+  path: '/releases/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PlaylistIndexRoute = PlaylistIndexImport.update({
+  id: '/playlist/',
+  path: '/playlist/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ArtistsIndexRoute = ArtistsIndexImport.update({
+  id: '/artists/',
+  path: '/artists/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AlbumsIndexRoute = AlbumsIndexImport.update({
+  id: '/albums/',
+  path: '/albums/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminIndexRoute = AdminIndexImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminAddRoute = AdminAddImport.update({
+  id: '/admin/add',
+  path: '/admin/add',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminEditAlbumIdRoute = AdminEditAlbumIdImport.update({
+  id: '/admin/edit/$albumId',
+  path: '/admin/edit/$albumId',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -95,53 +109,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminImport
-      parentRoute: typeof rootRoute
-    }
-    '/albums': {
-      id: '/albums'
-      path: '/albums'
-      fullPath: '/albums'
-      preLoaderRoute: typeof AlbumsImport
-      parentRoute: typeof rootRoute
-    }
-    '/artists': {
-      id: '/artists'
-      path: '/artists'
-      fullPath: '/artists'
-      preLoaderRoute: typeof ArtistsImport
-      parentRoute: typeof rootRoute
-    }
     '/not-found': {
       id: '/not-found'
       path: '/not-found'
       fullPath: '/not-found'
       preLoaderRoute: typeof NotFoundImport
-      parentRoute: typeof rootRoute
-    }
-    '/playlist': {
-      id: '/playlist'
-      path: '/playlist'
-      fullPath: '/playlist'
-      preLoaderRoute: typeof PlaylistImport
-      parentRoute: typeof rootRoute
-    }
-    '/releases': {
-      id: '/releases'
-      path: '/releases'
-      fullPath: '/releases'
-      preLoaderRoute: typeof ReleasesImport
-      parentRoute: typeof rootRoute
-    }
-    '/signin': {
-      id: '/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninImport
       parentRoute: typeof rootRoute
     }
     '/signout': {
@@ -151,11 +123,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignoutImport
       parentRoute: typeof rootRoute
     }
-    '/songs': {
-      id: '/songs'
+    '/admin/add': {
+      id: '/admin/add'
+      path: '/admin/add'
+      fullPath: '/admin/add'
+      preLoaderRoute: typeof AdminAddImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/albums/': {
+      id: '/albums/'
+      path: '/albums'
+      fullPath: '/albums'
+      preLoaderRoute: typeof AlbumsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/artists/': {
+      id: '/artists/'
+      path: '/artists'
+      fullPath: '/artists'
+      preLoaderRoute: typeof ArtistsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/playlist/': {
+      id: '/playlist/'
+      path: '/playlist'
+      fullPath: '/playlist'
+      preLoaderRoute: typeof PlaylistIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/releases/': {
+      id: '/releases/'
+      path: '/releases'
+      fullPath: '/releases'
+      preLoaderRoute: typeof ReleasesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/signin/': {
+      id: '/signin/'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/songs/': {
+      id: '/songs/'
       path: '/songs'
       fullPath: '/songs'
-      preLoaderRoute: typeof SongsImport
+      preLoaderRoute: typeof SongsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/admin/edit/$albumId': {
+      id: '/admin/edit/$albumId'
+      path: '/admin/edit/$albumId'
+      fullPath: '/admin/edit/$albumId'
+      preLoaderRoute: typeof AdminEditAlbumIdImport
       parentRoute: typeof rootRoute
     }
   }
@@ -165,108 +193,124 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
-  '/albums': typeof AlbumsRoute
-  '/artists': typeof ArtistsRoute
   '/not-found': typeof NotFoundRoute
-  '/playlist': typeof PlaylistRoute
-  '/releases': typeof ReleasesRoute
-  '/signin': typeof SigninRoute
   '/signout': typeof SignoutRoute
-  '/songs': typeof SongsRoute
+  '/admin/add': typeof AdminAddRoute
+  '/admin': typeof AdminIndexRoute
+  '/albums': typeof AlbumsIndexRoute
+  '/artists': typeof ArtistsIndexRoute
+  '/playlist': typeof PlaylistIndexRoute
+  '/releases': typeof ReleasesIndexRoute
+  '/signin': typeof SigninIndexRoute
+  '/songs': typeof SongsIndexRoute
+  '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
-  '/albums': typeof AlbumsRoute
-  '/artists': typeof ArtistsRoute
   '/not-found': typeof NotFoundRoute
-  '/playlist': typeof PlaylistRoute
-  '/releases': typeof ReleasesRoute
-  '/signin': typeof SigninRoute
   '/signout': typeof SignoutRoute
-  '/songs': typeof SongsRoute
+  '/admin/add': typeof AdminAddRoute
+  '/admin': typeof AdminIndexRoute
+  '/albums': typeof AlbumsIndexRoute
+  '/artists': typeof ArtistsIndexRoute
+  '/playlist': typeof PlaylistIndexRoute
+  '/releases': typeof ReleasesIndexRoute
+  '/signin': typeof SigninIndexRoute
+  '/songs': typeof SongsIndexRoute
+  '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
-  '/albums': typeof AlbumsRoute
-  '/artists': typeof ArtistsRoute
   '/not-found': typeof NotFoundRoute
-  '/playlist': typeof PlaylistRoute
-  '/releases': typeof ReleasesRoute
-  '/signin': typeof SigninRoute
   '/signout': typeof SignoutRoute
-  '/songs': typeof SongsRoute
+  '/admin/add': typeof AdminAddRoute
+  '/admin/': typeof AdminIndexRoute
+  '/albums/': typeof AlbumsIndexRoute
+  '/artists/': typeof ArtistsIndexRoute
+  '/playlist/': typeof PlaylistIndexRoute
+  '/releases/': typeof ReleasesIndexRoute
+  '/signin/': typeof SigninIndexRoute
+  '/songs/': typeof SongsIndexRoute
+  '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/not-found'
+    | '/signout'
+    | '/admin/add'
     | '/admin'
     | '/albums'
     | '/artists'
-    | '/not-found'
     | '/playlist'
     | '/releases'
     | '/signin'
-    | '/signout'
     | '/songs'
+    | '/admin/edit/$albumId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/not-found'
+    | '/signout'
+    | '/admin/add'
     | '/admin'
     | '/albums'
     | '/artists'
-    | '/not-found'
     | '/playlist'
     | '/releases'
     | '/signin'
-    | '/signout'
     | '/songs'
+    | '/admin/edit/$albumId'
   id:
     | '__root__'
     | '/'
-    | '/admin'
-    | '/albums'
-    | '/artists'
     | '/not-found'
-    | '/playlist'
-    | '/releases'
-    | '/signin'
     | '/signout'
-    | '/songs'
+    | '/admin/add'
+    | '/admin/'
+    | '/albums/'
+    | '/artists/'
+    | '/playlist/'
+    | '/releases/'
+    | '/signin/'
+    | '/songs/'
+    | '/admin/edit/$albumId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
-  AlbumsRoute: typeof AlbumsRoute
-  ArtistsRoute: typeof ArtistsRoute
   NotFoundRoute: typeof NotFoundRoute
-  PlaylistRoute: typeof PlaylistRoute
-  ReleasesRoute: typeof ReleasesRoute
-  SigninRoute: typeof SigninRoute
   SignoutRoute: typeof SignoutRoute
-  SongsRoute: typeof SongsRoute
+  AdminAddRoute: typeof AdminAddRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+  AlbumsIndexRoute: typeof AlbumsIndexRoute
+  ArtistsIndexRoute: typeof ArtistsIndexRoute
+  PlaylistIndexRoute: typeof PlaylistIndexRoute
+  ReleasesIndexRoute: typeof ReleasesIndexRoute
+  SigninIndexRoute: typeof SigninIndexRoute
+  SongsIndexRoute: typeof SongsIndexRoute
+  AdminEditAlbumIdRoute: typeof AdminEditAlbumIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
-  AlbumsRoute: AlbumsRoute,
-  ArtistsRoute: ArtistsRoute,
   NotFoundRoute: NotFoundRoute,
-  PlaylistRoute: PlaylistRoute,
-  ReleasesRoute: ReleasesRoute,
-  SigninRoute: SigninRoute,
   SignoutRoute: SignoutRoute,
-  SongsRoute: SongsRoute,
+  AdminAddRoute: AdminAddRoute,
+  AdminIndexRoute: AdminIndexRoute,
+  AlbumsIndexRoute: AlbumsIndexRoute,
+  ArtistsIndexRoute: ArtistsIndexRoute,
+  PlaylistIndexRoute: PlaylistIndexRoute,
+  ReleasesIndexRoute: ReleasesIndexRoute,
+  SigninIndexRoute: SigninIndexRoute,
+  SongsIndexRoute: SongsIndexRoute,
+  AdminEditAlbumIdRoute: AdminEditAlbumIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -280,46 +324,54 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/admin",
-        "/albums",
-        "/artists",
         "/not-found",
-        "/playlist",
-        "/releases",
-        "/signin",
         "/signout",
-        "/songs"
+        "/admin/add",
+        "/admin/",
+        "/albums/",
+        "/artists/",
+        "/playlist/",
+        "/releases/",
+        "/signin/",
+        "/songs/",
+        "/admin/edit/$albumId"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/admin": {
-      "filePath": "admin.tsx"
-    },
-    "/albums": {
-      "filePath": "albums.tsx"
-    },
-    "/artists": {
-      "filePath": "artists.tsx"
-    },
     "/not-found": {
       "filePath": "not-found.tsx"
-    },
-    "/playlist": {
-      "filePath": "playlist.tsx"
-    },
-    "/releases": {
-      "filePath": "releases.tsx"
-    },
-    "/signin": {
-      "filePath": "signin.tsx"
     },
     "/signout": {
       "filePath": "signout.tsx"
     },
-    "/songs": {
-      "filePath": "songs.tsx"
+    "/admin/add": {
+      "filePath": "admin/add.tsx"
+    },
+    "/admin/": {
+      "filePath": "admin/index.tsx"
+    },
+    "/albums/": {
+      "filePath": "albums/index.tsx"
+    },
+    "/artists/": {
+      "filePath": "artists/index.tsx"
+    },
+    "/playlist/": {
+      "filePath": "playlist/index.tsx"
+    },
+    "/releases/": {
+      "filePath": "releases/index.tsx"
+    },
+    "/signin/": {
+      "filePath": "signin/index.tsx"
+    },
+    "/songs/": {
+      "filePath": "songs/index.tsx"
+    },
+    "/admin/edit/$albumId": {
+      "filePath": "admin/edit/$albumId.tsx"
     }
   }
 }

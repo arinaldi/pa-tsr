@@ -11,7 +11,7 @@ import { DEBOUNCE_IN_MS, SORT_VALUE } from '@/lib/constants';
 import { Input } from '@/components/ui/input';
 import InputClearButton from '@/components/input-clear-button';
 import InputSpinner from '@/components/input-spinner';
-import { Route } from '../admin';
+import { Route } from '.';
 
 export default function Search(props: ComponentProps<'input'>) {
   const navigate = useNavigate({ from: Route.fullPath });
