@@ -26,19 +26,19 @@ import SortableColumn from './-sortable-column';
 import TableLink from './-table-link';
 
 export const Route = createFileRoute('/admin/')({
-  validateSearch: adminSearchSchema,
   component: Admin,
   loaderDeps: ({ search }) => ({ search}),
-  loader: async (context) => {
+  loader: async ({ deps }) => {
     await validateSession();
     
-    const data = await getAdminData(context.deps.search);
+    const data = await getAdminData(deps.search);
     
     return {
       ...data,
       title: 'Admin'
     }
   },
+  validateSearch: adminSearchSchema,
 })
 
 export default function Admin() {

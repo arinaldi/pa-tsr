@@ -22,6 +22,8 @@ import { Route as ArtistsIndexImport } from './routes/artists/index'
 import { Route as AlbumsIndexImport } from './routes/albums/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as AdminAddImport } from './routes/admin/add'
+import { Route as AlbumsAllTimeIndexImport } from './routes/albums/all-time/index'
+import { Route as AlbumsAllTimeEditImport } from './routes/albums/all-time/edit'
 import { Route as AdminEditAlbumIdImport } from './routes/admin/edit/$albumId'
 
 // Create/Update Routes
@@ -89,6 +91,18 @@ const AdminIndexRoute = AdminIndexImport.update({
 const AdminAddRoute = AdminAddImport.update({
   id: '/admin/add',
   path: '/admin/add',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AlbumsAllTimeIndexRoute = AlbumsAllTimeIndexImport.update({
+  id: '/albums/all-time/',
+  path: '/albums/all-time/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AlbumsAllTimeEditRoute = AlbumsAllTimeEditImport.update({
+  id: '/albums/all-time/edit',
+  path: '/albums/all-time/edit',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -186,6 +200,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminEditAlbumIdImport
       parentRoute: typeof rootRoute
     }
+    '/albums/all-time/edit': {
+      id: '/albums/all-time/edit'
+      path: '/albums/all-time/edit'
+      fullPath: '/albums/all-time/edit'
+      preLoaderRoute: typeof AlbumsAllTimeEditImport
+      parentRoute: typeof rootRoute
+    }
+    '/albums/all-time/': {
+      id: '/albums/all-time/'
+      path: '/albums/all-time'
+      fullPath: '/albums/all-time'
+      preLoaderRoute: typeof AlbumsAllTimeIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -204,6 +232,8 @@ export interface FileRoutesByFullPath {
   '/signin': typeof SigninIndexRoute
   '/songs': typeof SongsIndexRoute
   '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
+  '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
+  '/albums/all-time': typeof AlbumsAllTimeIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -219,6 +249,8 @@ export interface FileRoutesByTo {
   '/signin': typeof SigninIndexRoute
   '/songs': typeof SongsIndexRoute
   '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
+  '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
+  '/albums/all-time': typeof AlbumsAllTimeIndexRoute
 }
 
 export interface FileRoutesById {
@@ -235,6 +267,8 @@ export interface FileRoutesById {
   '/signin/': typeof SigninIndexRoute
   '/songs/': typeof SongsIndexRoute
   '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
+  '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
+  '/albums/all-time/': typeof AlbumsAllTimeIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -252,6 +286,8 @@ export interface FileRouteTypes {
     | '/signin'
     | '/songs'
     | '/admin/edit/$albumId'
+    | '/albums/all-time/edit'
+    | '/albums/all-time'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -266,6 +302,8 @@ export interface FileRouteTypes {
     | '/signin'
     | '/songs'
     | '/admin/edit/$albumId'
+    | '/albums/all-time/edit'
+    | '/albums/all-time'
   id:
     | '__root__'
     | '/'
@@ -280,6 +318,8 @@ export interface FileRouteTypes {
     | '/signin/'
     | '/songs/'
     | '/admin/edit/$albumId'
+    | '/albums/all-time/edit'
+    | '/albums/all-time/'
   fileRoutesById: FileRoutesById
 }
 
@@ -296,6 +336,8 @@ export interface RootRouteChildren {
   SigninIndexRoute: typeof SigninIndexRoute
   SongsIndexRoute: typeof SongsIndexRoute
   AdminEditAlbumIdRoute: typeof AdminEditAlbumIdRoute
+  AlbumsAllTimeEditRoute: typeof AlbumsAllTimeEditRoute
+  AlbumsAllTimeIndexRoute: typeof AlbumsAllTimeIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -311,6 +353,8 @@ const rootRouteChildren: RootRouteChildren = {
   SigninIndexRoute: SigninIndexRoute,
   SongsIndexRoute: SongsIndexRoute,
   AdminEditAlbumIdRoute: AdminEditAlbumIdRoute,
+  AlbumsAllTimeEditRoute: AlbumsAllTimeEditRoute,
+  AlbumsAllTimeIndexRoute: AlbumsAllTimeIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -334,7 +378,9 @@ export const routeTree = rootRoute
         "/releases/",
         "/signin/",
         "/songs/",
-        "/admin/edit/$albumId"
+        "/admin/edit/$albumId",
+        "/albums/all-time/edit",
+        "/albums/all-time/"
       ]
     },
     "/": {
@@ -372,6 +418,12 @@ export const routeTree = rootRoute
     },
     "/admin/edit/$albumId": {
       "filePath": "admin/edit/$albumId.tsx"
+    },
+    "/albums/all-time/edit": {
+      "filePath": "albums/all-time/edit.tsx"
+    },
+    "/albums/all-time/": {
+      "filePath": "albums/all-time/index.tsx"
     }
   }
 }

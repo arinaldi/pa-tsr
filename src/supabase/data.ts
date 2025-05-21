@@ -155,10 +155,8 @@ export async function getAllTimeRankings() {
   };
 }
 
-export async function getCandidates(searchParams: any) {
+export async function getCandidates(searchParams: AdminSearch) {
   const search = searchParams.search ?? '';
-  const [sortProp, desc] = searchParams.sort?.split(':') ?? [];
-  const direction = desc ? DESC : ASC;
   const searchTerm = `%${search}%`;
   let candidates: AllTimeListItem[] = [];
 
@@ -181,12 +179,8 @@ export async function getCandidates(searchParams: any) {
       .gte('rankings.position', 1)
       .or(`artist.ilike.${searchTerm}, title.ilike.${searchTerm}`)
       .range(0, 24)
-      .order('artist', { ascending: direction === ASC });
-
-    if (sortProp) {
-      query = query.order(sortProp, { ascending: direction === ASC });
-    }
-
+      .order('artist', { ascending: true });
+    
     const { data, error } = await query;
 
     if (error) throw new Error(error.message);
@@ -197,10 +191,10 @@ export async function getCandidates(searchParams: any) {
   return { candidates };
 }
 
-export async function getAllTimeData(args: any) {
+export async function getAllTimeData(searchParams: AdminSearch) {
   const [{ favorites }, { candidates }] = await Promise.all([
     getAllTimeRankings(),
-    getCandidates(args),
+    getCandidates(searchParams),
   ]);
 
   return {
