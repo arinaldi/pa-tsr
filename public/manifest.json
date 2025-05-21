@@ -3,7 +3,5 @@
   "name": "Perfect Albums",
   "icons": [],
   "start_url": ".",
-  "display": "standalone",
-  "theme_color": "##fcfcfc",
-  "background_color": "##fcfcfc"
+  "display": "standalone"
 }
