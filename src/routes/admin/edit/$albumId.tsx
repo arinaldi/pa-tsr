@@ -29,6 +29,7 @@ export const Route = createFileRoute('/admin/edit/$albumId')({
       title: 'Edit album',
     };
   },
+  preload: false,
 })
 
 function EditAlbum() {

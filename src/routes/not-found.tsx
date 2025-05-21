@@ -5,7 +5,7 @@ export const Route = createFileRoute('/not-found')({
   component: NotFound,
 })
 
-function NotFound() {
+export function NotFound() {
   return (
     <div className="max-w-sm">
       <div className="flex w-full flex-col items-center justify-center rounded-md border border-dashed p-6 text-center sm:w-auto sm:min-w-[400px]">

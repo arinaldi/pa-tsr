@@ -5,11 +5,16 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 // import reportWebVitals from './reportWebVitals.ts'
 import { routeTree } from './routeTree.gen';
 import './styles.css';
+import { NotFound } from './routes/not-found';
+
+const THIRTY_SECONDS = 1000 * 30;
 
 const router = createRouter({
   context: {},
+  defaultNotFoundComponent: NotFound,
   defaultPreload: 'intent',
-  defaultPreloadStaleTime: 0,
+  defaultPreloadStaleTime: THIRTY_SECONDS,
+  defaultStaleTime: THIRTY_SECONDS,
   defaultStructuralSharing: true,
   routeTree,
   scrollRestoration: true,
