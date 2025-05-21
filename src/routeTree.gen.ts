@@ -21,6 +21,7 @@ import { Route as PlaylistIndexImport } from './routes/playlist/index'
 import { Route as ArtistsIndexImport } from './routes/artists/index'
 import { Route as AlbumsIndexImport } from './routes/albums/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
+import { Route as AlbumsYearImport } from './routes/albums/$year'
 import { Route as AdminAddImport } from './routes/admin/add'
 import { Route as AlbumsAllTimeIndexImport } from './routes/albums/all-time/index'
 import { Route as AlbumsAllTimeEditImport } from './routes/albums/all-time/edit'
@@ -88,6 +89,12 @@ const AdminIndexRoute = AdminIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AlbumsYearRoute = AlbumsYearImport.update({
+  id: '/albums/$year',
+  path: '/albums/$year',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const AdminAddRoute = AdminAddImport.update({
   id: '/admin/add',
   path: '/admin/add',
@@ -142,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/add'
       fullPath: '/admin/add'
       preLoaderRoute: typeof AdminAddImport
+      parentRoute: typeof rootRoute
+    }
+    '/albums/$year': {
+      id: '/albums/$year'
+      path: '/albums/$year'
+      fullPath: '/albums/$year'
+      preLoaderRoute: typeof AlbumsYearImport
       parentRoute: typeof rootRoute
     }
     '/admin/': {
@@ -224,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/not-found': typeof NotFoundRoute
   '/signout': typeof SignoutRoute
   '/admin/add': typeof AdminAddRoute
+  '/albums/$year': typeof AlbumsYearRoute
   '/admin': typeof AdminIndexRoute
   '/albums': typeof AlbumsIndexRoute
   '/artists': typeof ArtistsIndexRoute
@@ -241,6 +256,7 @@ export interface FileRoutesByTo {
   '/not-found': typeof NotFoundRoute
   '/signout': typeof SignoutRoute
   '/admin/add': typeof AdminAddRoute
+  '/albums/$year': typeof AlbumsYearRoute
   '/admin': typeof AdminIndexRoute
   '/albums': typeof AlbumsIndexRoute
   '/artists': typeof ArtistsIndexRoute
@@ -259,6 +275,7 @@ export interface FileRoutesById {
   '/not-found': typeof NotFoundRoute
   '/signout': typeof SignoutRoute
   '/admin/add': typeof AdminAddRoute
+  '/albums/$year': typeof AlbumsYearRoute
   '/admin/': typeof AdminIndexRoute
   '/albums/': typeof AlbumsIndexRoute
   '/artists/': typeof ArtistsIndexRoute
@@ -278,6 +295,7 @@ export interface FileRouteTypes {
     | '/not-found'
     | '/signout'
     | '/admin/add'
+    | '/albums/$year'
     | '/admin'
     | '/albums'
     | '/artists'
@@ -294,6 +312,7 @@ export interface FileRouteTypes {
     | '/not-found'
     | '/signout'
     | '/admin/add'
+    | '/albums/$year'
     | '/admin'
     | '/albums'
     | '/artists'
@@ -310,6 +329,7 @@ export interface FileRouteTypes {
     | '/not-found'
     | '/signout'
     | '/admin/add'
+    | '/albums/$year'
     | '/admin/'
     | '/albums/'
     | '/artists/'
@@ -328,6 +348,7 @@ export interface RootRouteChildren {
   NotFoundRoute: typeof NotFoundRoute
   SignoutRoute: typeof SignoutRoute
   AdminAddRoute: typeof AdminAddRoute
+  AlbumsYearRoute: typeof AlbumsYearRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AlbumsIndexRoute: typeof AlbumsIndexRoute
   ArtistsIndexRoute: typeof ArtistsIndexRoute
@@ -345,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotFoundRoute: NotFoundRoute,
   SignoutRoute: SignoutRoute,
   AdminAddRoute: AdminAddRoute,
+  AlbumsYearRoute: AlbumsYearRoute,
   AdminIndexRoute: AdminIndexRoute,
   AlbumsIndexRoute: AlbumsIndexRoute,
   ArtistsIndexRoute: ArtistsIndexRoute,
@@ -371,6 +393,7 @@ export const routeTree = rootRoute
         "/not-found",
         "/signout",
         "/admin/add",
+        "/albums/$year",
         "/admin/",
         "/albums/",
         "/artists/",
@@ -394,6 +417,9 @@ export const routeTree = rootRoute
     },
     "/admin/add": {
       "filePath": "admin/add.tsx"
+    },
+    "/albums/$year": {
+      "filePath": "albums/$year.tsx"
     },
     "/admin/": {
       "filePath": "admin/index.tsx"
