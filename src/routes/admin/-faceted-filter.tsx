@@ -73,7 +73,7 @@ export default function FacetedFilter({ queryKey, title }: Props) {
               />
               <div className="flex space-x-1">
                 <Badge
-                  className="bg-muted rounded-sm px-1 font-normal"
+                  className="rounded-sm px-1 font-normal"
                   variant="secondary"
                 >
                   {selectedOption.label}

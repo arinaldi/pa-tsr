@@ -49,7 +49,7 @@ export default function AppSidebar() {
             <SidebarMenuItem>
               <SidebarMenuButton
                 asChild
-                className="hover:bg-transparent hover:text-sidebar-secondary-foreground"
+                className="hover:bg-transparent"
                 size="lg"
               >
                 <div>
