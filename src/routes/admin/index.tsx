@@ -53,7 +53,7 @@ export default function Admin() {
         <div className="flex items-center gap-4 dark:text-white">
           <code className="text-xs">{__APP_VERSION__}</code>
           <span className="flex items-center gap-0.5">
-            <Badge variant="secondary">{cdCount.toLocaleString()}</Badge>
+            <Badge className="bg-muted" variant="secondary">{cdCount.toLocaleString()}</Badge>
             <span className="text-sm leading-7">
               CD{cdCount === 1 ? '' : 's'}
             </span>

@@ -78,7 +78,7 @@ export default function PageTitle() {
           <span className="flex items-center gap-2">
             <span>{data.title}</span>
             {data.count !== undefined && (
-              <Badge variant="secondary">{data.count.toLocaleString()}</Badge>
+              <Badge className="bg-muted" variant="secondary">{data.count.toLocaleString()}</Badge>
             )}
           </span>
         </BreadcrumbPage>
