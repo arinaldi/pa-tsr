@@ -45,6 +45,7 @@ export default function DeleteAlbumModal({ album, className = '' }: Props) {
       }),
     ],
     initialState: undefined,
+    shouldInvalidate: false,
     submitFn: async () => {
       if (album.favorite) {
         const { data: ranking, error: rankingError } = await supabase

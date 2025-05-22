@@ -11,6 +11,7 @@ type State = void | undefined;
 interface Options {
   callbacks?: Callback[];
   initialState: State;
+  shouldInvalidate?: boolean;
   submitFn: (data?: any) => Promise<void>;
   successMessage?: string;
 }
@@ -18,6 +19,7 @@ interface Options {
 export function useAction({
   callbacks,
   initialState,
+  shouldInvalidate = true,
   submitFn,
   successMessage,
 }: Options) {
@@ -25,7 +27,10 @@ export function useAction({
   const [state, action, pending] = useActionState(async () => {
     try {
       await submitFn();
-      router.invalidate();
+
+      if (shouldInvalidate) {
+        router.invalidate();
+      }
 
       callbacks?.forEach((c) => {
         c();
