@@ -15,7 +15,7 @@ import { ROUTE_HREF, SPOTIFY_URL } from '@/lib/constants';
 import { getFavorites } from '@/supabase/data';
 import DecadeLink from './-decade-link';
 
-export const Route = createFileRoute('/albums')({
+export const Route = createFileRoute('/albums/')({
   component: TopAlbums,
   loader: async () => {
     const data = await getFavorites();

@@ -18,7 +18,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
-import { Route } from './route';
+import { Route } from '.';
 import type { AdminSearch } from './-schema';
 
 interface Props {

@@ -8,7 +8,7 @@ import OtpForm from './-otp-form';
 import PasswordForm from './-password-form';
 import { emailSchema } from './-schema';
 
-export const Route = createFileRoute('/signin')({
+export const Route = createFileRoute('/signin/')({
   component: Signin,
   loader: async () => {
     const {

@@ -5,7 +5,7 @@ import { ArrowDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { Children } from '@/lib/types';
 import { TableHead } from '@/components/ui/table';
-import { Route } from './route';
+import { Route } from '.';
 
 interface Props extends Children {
   prop: string;
