@@ -23,7 +23,7 @@ import { Route as AlbumsIndexImport } from './routes/albums/index'
 import { Route as AdminIndexImport } from './routes/admin/index'
 import { Route as AlbumsYearImport } from './routes/albums/$year'
 import { Route as AdminAddImport } from './routes/admin/add'
-import { Route as AlbumsAllTimeRouteImport } from './routes/albums/all-time/route'
+import { Route as AlbumsAllTimeIndexImport } from './routes/albums/all-time/index'
 import { Route as AlbumsAllTimeEditImport } from './routes/albums/all-time/edit'
 import { Route as AdminEditAlbumIdImport } from './routes/admin/edit/$albumId'
 
@@ -101,16 +101,16 @@ const AdminAddRoute = AdminAddImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AlbumsAllTimeRouteRoute = AlbumsAllTimeRouteImport.update({
-  id: '/albums/all-time',
-  path: '/albums/all-time',
+const AlbumsAllTimeIndexRoute = AlbumsAllTimeIndexImport.update({
+  id: '/albums/all-time/',
+  path: '/albums/all-time/',
   getParentRoute: () => rootRoute,
 } as any)
 
 const AlbumsAllTimeEditRoute = AlbumsAllTimeEditImport.update({
-  id: '/edit',
-  path: '/edit',
-  getParentRoute: () => AlbumsAllTimeRouteRoute,
+  id: '/albums/all-time/edit',
+  path: '/albums/all-time/edit',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const AdminEditAlbumIdRoute = AdminEditAlbumIdImport.update({
@@ -142,13 +142,6 @@ declare module '@tanstack/react-router' {
       path: '/signout'
       fullPath: '/signout'
       preLoaderRoute: typeof SignoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/albums/all-time': {
-      id: '/albums/all-time'
-      path: '/albums/all-time'
-      fullPath: '/albums/all-time'
-      preLoaderRoute: typeof AlbumsAllTimeRouteImport
       parentRoute: typeof rootRoute
     }
     '/admin/add': {
@@ -223,32 +216,27 @@ declare module '@tanstack/react-router' {
     }
     '/albums/all-time/edit': {
       id: '/albums/all-time/edit'
-      path: '/edit'
+      path: '/albums/all-time/edit'
       fullPath: '/albums/all-time/edit'
       preLoaderRoute: typeof AlbumsAllTimeEditImport
-      parentRoute: typeof AlbumsAllTimeRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/albums/all-time/': {
+      id: '/albums/all-time/'
+      path: '/albums/all-time'
+      fullPath: '/albums/all-time'
+      preLoaderRoute: typeof AlbumsAllTimeIndexImport
+      parentRoute: typeof rootRoute
     }
   }
 }
 
 // Create and export the route tree
 
-interface AlbumsAllTimeRouteRouteChildren {
-  AlbumsAllTimeEditRoute: typeof AlbumsAllTimeEditRoute
-}
-
-const AlbumsAllTimeRouteRouteChildren: AlbumsAllTimeRouteRouteChildren = {
-  AlbumsAllTimeEditRoute: AlbumsAllTimeEditRoute,
-}
-
-const AlbumsAllTimeRouteRouteWithChildren =
-  AlbumsAllTimeRouteRoute._addFileChildren(AlbumsAllTimeRouteRouteChildren)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/not-found': typeof NotFoundRoute
   '/signout': typeof SignoutRoute
-  '/albums/all-time': typeof AlbumsAllTimeRouteRouteWithChildren
   '/admin/add': typeof AdminAddRoute
   '/albums/$year': typeof AlbumsYearRoute
   '/admin': typeof AdminIndexRoute
@@ -260,13 +248,13 @@ export interface FileRoutesByFullPath {
   '/songs': typeof SongsIndexRoute
   '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
   '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
+  '/albums/all-time': typeof AlbumsAllTimeIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/not-found': typeof NotFoundRoute
   '/signout': typeof SignoutRoute
-  '/albums/all-time': typeof AlbumsAllTimeRouteRouteWithChildren
   '/admin/add': typeof AdminAddRoute
   '/albums/$year': typeof AlbumsYearRoute
   '/admin': typeof AdminIndexRoute
@@ -278,6 +266,7 @@ export interface FileRoutesByTo {
   '/songs': typeof SongsIndexRoute
   '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
   '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
+  '/albums/all-time': typeof AlbumsAllTimeIndexRoute
 }
 
 export interface FileRoutesById {
@@ -285,7 +274,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/not-found': typeof NotFoundRoute
   '/signout': typeof SignoutRoute
-  '/albums/all-time': typeof AlbumsAllTimeRouteRouteWithChildren
   '/admin/add': typeof AdminAddRoute
   '/albums/$year': typeof AlbumsYearRoute
   '/admin/': typeof AdminIndexRoute
@@ -297,6 +285,7 @@ export interface FileRoutesById {
   '/songs/': typeof SongsIndexRoute
   '/admin/edit/$albumId': typeof AdminEditAlbumIdRoute
   '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
+  '/albums/all-time/': typeof AlbumsAllTimeIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -305,7 +294,6 @@ export interface FileRouteTypes {
     | '/'
     | '/not-found'
     | '/signout'
-    | '/albums/all-time'
     | '/admin/add'
     | '/albums/$year'
     | '/admin'
@@ -317,12 +305,12 @@ export interface FileRouteTypes {
     | '/songs'
     | '/admin/edit/$albumId'
     | '/albums/all-time/edit'
+    | '/albums/all-time'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/not-found'
     | '/signout'
-    | '/albums/all-time'
     | '/admin/add'
     | '/albums/$year'
     | '/admin'
@@ -334,12 +322,12 @@ export interface FileRouteTypes {
     | '/songs'
     | '/admin/edit/$albumId'
     | '/albums/all-time/edit'
+    | '/albums/all-time'
   id:
     | '__root__'
     | '/'
     | '/not-found'
     | '/signout'
-    | '/albums/all-time'
     | '/admin/add'
     | '/albums/$year'
     | '/admin/'
@@ -351,6 +339,7 @@ export interface FileRouteTypes {
     | '/songs/'
     | '/admin/edit/$albumId'
     | '/albums/all-time/edit'
+    | '/albums/all-time/'
   fileRoutesById: FileRoutesById
 }
 
@@ -358,7 +347,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NotFoundRoute: typeof NotFoundRoute
   SignoutRoute: typeof SignoutRoute
-  AlbumsAllTimeRouteRoute: typeof AlbumsAllTimeRouteRouteWithChildren
   AdminAddRoute: typeof AdminAddRoute
   AlbumsYearRoute: typeof AlbumsYearRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -369,13 +357,14 @@ export interface RootRouteChildren {
   SigninIndexRoute: typeof SigninIndexRoute
   SongsIndexRoute: typeof SongsIndexRoute
   AdminEditAlbumIdRoute: typeof AdminEditAlbumIdRoute
+  AlbumsAllTimeEditRoute: typeof AlbumsAllTimeEditRoute
+  AlbumsAllTimeIndexRoute: typeof AlbumsAllTimeIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   NotFoundRoute: NotFoundRoute,
   SignoutRoute: SignoutRoute,
-  AlbumsAllTimeRouteRoute: AlbumsAllTimeRouteRouteWithChildren,
   AdminAddRoute: AdminAddRoute,
   AlbumsYearRoute: AlbumsYearRoute,
   AdminIndexRoute: AdminIndexRoute,
@@ -386,6 +375,8 @@ const rootRouteChildren: RootRouteChildren = {
   SigninIndexRoute: SigninIndexRoute,
   SongsIndexRoute: SongsIndexRoute,
   AdminEditAlbumIdRoute: AdminEditAlbumIdRoute,
+  AlbumsAllTimeEditRoute: AlbumsAllTimeEditRoute,
+  AlbumsAllTimeIndexRoute: AlbumsAllTimeIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -401,7 +392,6 @@ export const routeTree = rootRoute
         "/",
         "/not-found",
         "/signout",
-        "/albums/all-time",
         "/admin/add",
         "/albums/$year",
         "/admin/",
@@ -411,7 +401,9 @@ export const routeTree = rootRoute
         "/releases/",
         "/signin/",
         "/songs/",
-        "/admin/edit/$albumId"
+        "/admin/edit/$albumId",
+        "/albums/all-time/edit",
+        "/albums/all-time/"
       ]
     },
     "/": {
@@ -422,12 +414,6 @@ export const routeTree = rootRoute
     },
     "/signout": {
       "filePath": "signout.tsx"
-    },
-    "/albums/all-time": {
-      "filePath": "albums/all-time/route.tsx",
-      "children": [
-        "/albums/all-time/edit"
-      ]
     },
     "/admin/add": {
       "filePath": "admin/add.tsx"
@@ -460,8 +446,10 @@ export const routeTree = rootRoute
       "filePath": "admin/edit/$albumId.tsx"
     },
     "/albums/all-time/edit": {
-      "filePath": "albums/all-time/edit.tsx",
-      "parent": "/albums/all-time"
+      "filePath": "albums/all-time/edit.tsx"
+    },
+    "/albums/all-time/": {
+      "filePath": "albums/all-time/index.tsx"
     }
   }
 }

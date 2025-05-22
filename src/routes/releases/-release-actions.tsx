@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { EllipsisVertical, Pencil, Trash } from 'lucide-react';
+import { useState } from 'react';
 
-import type { Release } from '@/lib/types';
+import { useSession } from '@/components/session-provider';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import {
@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useSession } from '@/components/session-provider';
+import type { Release } from '@/lib/types';
 import DeleteReleaseModal from './-delete-release-modal';
 import EditReleaseModal from './-edit-release-modal';
 

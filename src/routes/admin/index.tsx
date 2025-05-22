@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { Check, Disc, HeartPlus } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -15,31 +15,31 @@ import { ROUTES_ADMIN } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { validateSession } from '@/supabase/client';
 import { getAdminData } from '@/supabase/data';
-import { adminSearchSchema } from './-schema';
 import AlbumActions from './-album-actions';
 import DataEmptyPlaceholder from './-data-empty-placeholder';
 import FacetedFilter from './-faceted-filter';
 import Paginate from './-paginate';
 import ResetFilters from './-reset-filters';
+import { adminSearchSchema } from './-schema';
 import Search from './-search';
 import SortableColumn from './-sortable-column';
 import TableLink from './-table-link';
 
 export const Route = createFileRoute('/admin/')({
   component: Admin,
-  loaderDeps: ({ search }) => ({ search}),
+  loaderDeps: ({ search }) => ({ search }),
   loader: async ({ deps }) => {
     await validateSession();
-    
+
     const data = await getAdminData(deps.search);
-    
+
     return {
       ...data,
-      title: 'Admin'
-    }
+      title: 'Admin',
+    };
   },
   validateSearch: adminSearchSchema,
-})
+});
 
 export default function Admin() {
   const { albums, cdCount, count } = Route.useLoaderData();
@@ -94,10 +94,10 @@ export default function Admin() {
                     <TableCell>{a.year}</TableCell>
                     <TableCell>
                       {a.cd && (
-                        <Disc className="text-muted-foreground mr-1 mb-0.5 inline size-4" />
+                        <Disc className="mr-1 mb-0.5 inline size-4 text-muted-foreground" />
                       )}
                       {a.wishlist && (
-                        <HeartPlus className="text-muted-foreground mr-1 mb-0.5 inline size-4" />
+                        <HeartPlus className="mr-1 mb-0.5 inline size-4 text-muted-foreground" />
                       )}
                       <span
                         className={cn(
@@ -108,7 +108,7 @@ export default function Admin() {
                         {a.title}
                       </span>
                       {a.favorite && (
-                        <Check className="text-muted-foreground mb-0.5 ml-1 inline size-4" />
+                        <Check className="mb-0.5 ml-1 inline size-4 text-muted-foreground" />
                       )}
                     </TableCell>
                     <TableCell className="flex items-end justify-end gap-2">

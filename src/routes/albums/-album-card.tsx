@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { type AllTimeListItem } from '@/lib/formatters';
+import type { AllTimeListItem } from '@/lib/formatters';
 import RemoveAllTimeRankingModal from './-remove-ranking-modal';
 
 interface Props {
@@ -27,7 +27,7 @@ export default function AlbumCard({ item, position, removeItem }: Props) {
       value={item}
     >
       <Card className="py-0 transition-shadow has-[svg:active]:shadow-lg">
-        <CardHeader className="p-4 select-none">
+        <CardHeader className="select-none p-4">
           <div className="flex items-start justify-between gap-2">
             <CardTitle>
               {position}. {item.title}

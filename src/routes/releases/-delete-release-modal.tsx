@@ -1,3 +1,4 @@
+import SubmitButton from '@/components/submit-button';
 import {
   DialogContent,
   DialogDescription,
@@ -5,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import SubmitButton from '@/components/submit-button';
 import { useAction } from '@/hooks/use-action';
 import { MESSAGES } from '@/lib/constants';
 import type { Release } from '@/lib/types';

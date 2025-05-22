@@ -1,8 +1,7 @@
-import { startTransition, useOptimistic, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { Circle, CircleOff, PlusCircle } from 'lucide-react';
+import { startTransition, useOptimistic, useState } from 'react';
 
-import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -18,6 +17,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 import { Route } from '.';
 import type { AdminSearch } from './-schema';
 
@@ -37,7 +37,9 @@ export default function FacetedFilter({ queryKey, title }: Props) {
   const [open, setOpen] = useState(false);
   const initialValue = searchParams[queryKey as keyof AdminSearch] ?? '';
   const [optimisticValue, setOptimisticValue] = useOptimistic(initialValue);
-  const selectedOption = options.find((o) => o.value === optimisticValue.toString());
+  const selectedOption = options.find(
+    (o) => o.value === optimisticValue.toString(),
+  );
 
   function onSelect(value: string) {
     const newValue = value === 'clear' ? '' : value;
@@ -50,7 +52,7 @@ export default function FacetedFilter({ queryKey, title }: Props) {
           ...prev,
           page: 1,
           [queryKey]: value === 'clear' ? undefined : value === 'true',
-        })
+        }),
       });
     });
   }
@@ -94,10 +96,11 @@ export default function FacetedFilter({ queryKey, title }: Props) {
                     onSelect={onSelect}
                     value={option.value}
                   >
-                    <option.icon className="text-muted-foreground size-4" />
+                    <option.icon className="size-4 text-muted-foreground" />
                     <span
                       className={cn(
-                        option.value === optimisticValue.toString() && 'font-semibold',
+                        option.value === optimisticValue.toString() &&
+                          'font-semibold',
                       )}
                     >
                       {option.label}

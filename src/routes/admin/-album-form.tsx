@@ -1,6 +1,7 @@
-import { type FormEvent } from 'react';
-import { type UseFormReturn } from 'react-hook-form';
+import type { FormEvent } from 'react';
+import type { UseFormReturn } from 'react-hook-form';
 
+import SubmitButton from '@/components/submit-button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
@@ -12,8 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import SubmitButton from '@/components/submit-button';
-import { type AlbumInput } from './-schema';
+import type { AlbumInput } from './-schema';
 
 interface Props {
   form: UseFormReturn<AlbumInput>;
@@ -68,7 +68,7 @@ export default function AlbumForm({ form, onSubmit, submitting }: Props) {
           control={form.control}
           name="studio"
           render={({ field }) => (
-            <FormItem className="flex space-y-0 space-x-3">
+            <FormItem className="flex space-x-3 space-y-0">
               <FormControl>
                 <Checkbox
                   checked={field.value}
@@ -87,7 +87,7 @@ export default function AlbumForm({ form, onSubmit, submitting }: Props) {
           control={form.control}
           name="cd"
           render={({ field }) => (
-            <FormItem className="flex space-y-0 space-x-3">
+            <FormItem className="flex space-x-3 space-y-0">
               <FormControl>
                 <Checkbox
                   checked={field.value}
@@ -106,7 +106,7 @@ export default function AlbumForm({ form, onSubmit, submitting }: Props) {
           control={form.control}
           name="wishlist"
           render={({ field }) => (
-            <FormItem className="flex space-y-0 space-x-3">
+            <FormItem className="flex space-x-3 space-y-0">
               <FormControl>
                 <Checkbox
                   checked={field.value}
@@ -125,7 +125,7 @@ export default function AlbumForm({ form, onSubmit, submitting }: Props) {
           control={form.control}
           name="favorite"
           render={({ field }) => (
-            <FormItem className="flex space-y-0 space-x-3">
+            <FormItem className="flex space-x-3 space-y-0">
               <FormControl>
                 <Checkbox
                   checked={field.value}

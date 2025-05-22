@@ -32,7 +32,7 @@ function FeaturedSongs() {
           return (
             <div key={letter}>
               <h2
-                className="border-b pb-2 text-xl font-semibold tracking-tight"
+                className="border-b pb-2 font-semibold text-xl tracking-tight"
                 id={`letter-${letter}`}
               >
                 {letter}
@@ -46,7 +46,7 @@ function FeaturedSongs() {
                           {s.artist} &ndash;
                         </span>{' '}
                         <a
-                          className="hover:text-muted-foreground underline underline-offset-4"
+                          className="underline underline-offset-4 hover:text-muted-foreground"
                           href={s.link}
                           rel="noopener noreferrer"
                           target="_blank"

@@ -1,16 +1,11 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { Pencil } from 'lucide-react';
 
+import { useSession } from '@/components/session-provider';
+import TopLink from '@/components/top-link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import TopLink from '@/components/top-link';
-import { useSession } from '@/components/session-provider';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ROUTE_HREF, SPOTIFY_URL } from '@/lib/constants';
 import { getFavorites } from '@/supabase/data';
 import DecadeLink from './-decade-link';
@@ -43,7 +38,9 @@ function TopAlbums() {
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2" id={year}>
                     {year}
-                    <Badge variant="secondary">{favorites.length.toLocaleString()}</Badge>
+                    <Badge variant="secondary">
+                      {favorites.length.toLocaleString()}
+                    </Badge>
                   </CardTitle>
                   {session && (
                     <Link to={ROUTE_HREF.EDIT_RANKINGS.replace(':year', year)}>
@@ -62,18 +59,18 @@ function TopAlbums() {
                       if (a.ranking < b.ranking) return -1;
                       return 0;
                     })
-                    .map((f, index) => {
+                    .map((f) => {
                       const query = encodeURI(`${f.artist} ${f.title}`);
                       const url = `${SPOTIFY_URL}/${query}`;
 
                       return (
                         <li
-                          key={index}
+                          key={f.id}
                           className="text-muted-foreground text-sm"
                         >
                           <span>{f.artist} &ndash;</span>{' '}
                           <a
-                            className="text-foreground hover:text-muted-foreground underline underline-offset-4"
+                            className="text-foreground underline underline-offset-4 hover:text-muted-foreground"
                             href={url}
                             rel="noopener noreferrer"
                             target="_blank"

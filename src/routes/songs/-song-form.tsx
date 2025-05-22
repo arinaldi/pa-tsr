@@ -1,6 +1,7 @@
-import { type FormEvent } from 'react';
-import { type UseFormReturn } from 'react-hook-form';
+import type { FormEvent } from 'react';
+import type { UseFormReturn } from 'react-hook-form';
 
+import SubmitButton from '@/components/submit-button';
 import {
   Form,
   FormControl,
@@ -10,9 +11,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import SubmitButton from '@/components/submit-button';
 import { cn } from '@/lib/utils';
-import { type SongInput } from './-schema';
+import type { SongInput } from './-schema';
 
 interface Props {
   className?: string;

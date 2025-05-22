@@ -1,9 +1,9 @@
-import { type FormEvent, useState } from 'react';
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Reorder } from 'framer-motion';
+import { type FormEvent, useState } from 'react';
 
-import { Button } from '@/components/ui/button';
 import SubmitButton from '@/components/submit-button';
+import { Button } from '@/components/ui/button';
 import { useSubmit } from '@/hooks/use-submit';
 import { ROUTE_HREF } from '@/lib/constants';
 import DataEmptyPlaceholder from '@/routes/admin/-data-empty-placeholder';
@@ -37,7 +37,7 @@ export const Route = createFileRoute('/albums/all-time/edit')({
     };
   },
   validateSearch: adminSearchSchema,
-})
+});
 
 function EditAllTimeRankings() {
   const { candidates, favorites } = Route.useLoaderData();
@@ -90,7 +90,7 @@ function EditAllTimeRankings() {
                   key={c.id}
                 >
                   <div>
-                    <p className="text-sm font-medium">{c.title}</p>
+                    <p className="font-medium text-sm">{c.title}</p>
                     <p className="text-muted-foreground text-sm">{c.artist}</p>
                     <p className="text-muted-foreground text-xs">{c.year}</p>
                   </div>
@@ -130,4 +130,3 @@ function EditAllTimeRankings() {
     </div>
   );
 }
-

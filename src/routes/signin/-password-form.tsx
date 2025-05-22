@@ -1,7 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 
+import PasswordInput from '@/components/password-input';
+import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -12,8 +14,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import PasswordInput from '@/components/password-input';
-import SubmitButton from '@/components/submit-button';
 import { useMobile } from '@/hooks/use-mobile';
 import { useSubmit } from '@/hooks/use-submit';
 import { EMAIL, MESSAGES, ROUTES_ADMIN } from '@/lib/constants';

@@ -1,16 +1,16 @@
+import { useNavigate } from '@tanstack/react-router';
 import {
+  type ChangeEvent,
+  type ComponentProps,
   useRef,
   useState,
   useTransition,
-  type ChangeEvent,
-  type ComponentProps,
 } from 'react';
-import { useNavigate } from '@tanstack/react-router';
 
-import { DEBOUNCE_IN_MS } from '@/lib/constants';
-import { Input } from '@/components/ui/input';
 import InputClearButton from '@/components/input-clear-button';
 import InputSpinner from '@/components/input-spinner';
+import { Input } from '@/components/ui/input';
+import { DEBOUNCE_IN_MS } from '@/lib/constants';
 import { Route } from './edit';
 
 export default function Search(props: ComponentProps<'input'>) {
@@ -31,7 +31,7 @@ export default function Search(props: ComponentProps<'input'>) {
         navigate({
           search: () => ({
             search: value ?? undefined,
-          })
+          }),
         });
       });
 
@@ -46,7 +46,7 @@ export default function Search(props: ComponentProps<'input'>) {
       navigate({
         search: () => ({
           search: undefined,
-        })
+        }),
       });
     });
 

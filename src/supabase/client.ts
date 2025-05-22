@@ -1,5 +1,5 @@
-import { redirect } from '@tanstack/react-router';
 import { createClient } from '@supabase/supabase-js';
+import { redirect } from '@tanstack/react-router';
 
 import type { Database } from './db-types';
 

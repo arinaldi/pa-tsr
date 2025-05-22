@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
 
+import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -21,7 +22,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import SubmitButton from '@/components/submit-button';
 import { useAction } from '@/hooks/use-action';
 import { useMobile } from '@/hooks/use-mobile';
 import { MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
@@ -39,10 +39,11 @@ export default function DeleteAlbumModal({ album, className = '' }: Props) {
   const mobile = useMobile();
   const [, action, pending] = useAction({
     callbacks: [
-      () => navigate({
-        search: (prev) => prev,
-        to: ROUTES_ADMIN.base.href,
-      }),
+      () =>
+        navigate({
+          search: (prev) => prev,
+          to: ROUTES_ADMIN.base.href,
+        }),
     ],
     initialState: undefined,
     shouldInvalidate: false,

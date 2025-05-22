@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
+import { Fragment } from 'react';
 
 import { HEADER_LETTERS } from '@/lib/formatters';
 
@@ -11,7 +11,7 @@ export default function LetterLink() {
       {HEADER_LETTERS.map((l, index) => (
         <Fragment key={l}>
           <Link
-            className="hover:text-muted-foreground underline underline-offset-4"
+            className="underline underline-offset-4 hover:text-muted-foreground"
             key={l}
             hash={`letter-${l}`}
             to={pathname}

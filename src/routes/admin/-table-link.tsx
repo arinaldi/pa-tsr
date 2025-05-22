@@ -1,8 +1,8 @@
 import { Link } from '@tanstack/react-router';
 import { ChevronRight } from 'lucide-react';
 
-import { ROUTES_ADMIN } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
+import { ROUTES_ADMIN } from '@/lib/constants';
 
 interface Props {
   id: number;

@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
 import { Badge } from '@/components/ui/badge';
 import { sortReleases } from '@/lib/formatters';
@@ -17,7 +17,7 @@ export const Route = createFileRoute('/releases/')({
       title: 'New releases',
     };
   },
-})
+});
 
 function NewReleases() {
   const { releases } = Route.useLoaderData();
@@ -30,7 +30,7 @@ function NewReleases() {
           .sort(sortReleases)
           .map(([date, data]) => (
             <div key={date}>
-              <h2 className="bg-accent flex items-center gap-2 rounded-md px-3 py-2 text-xl font-semibold tracking-tight">
+              <h2 className="flex items-center gap-2 rounded-md bg-accent px-3 py-2 font-semibold text-xl tracking-tight">
                 {date}
                 <Badge className="bg-background" variant="outline">
                   {data.length.toLocaleString()}

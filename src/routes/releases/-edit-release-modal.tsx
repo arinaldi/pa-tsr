@@ -1,7 +1,6 @@
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
-import type { Release } from '@/lib/types';
 import {
   DialogContent,
   DialogDescription,
@@ -11,9 +10,10 @@ import {
 import { useSubmit } from '@/hooks/use-submit';
 import { MESSAGES } from '@/lib/constants';
 import { formatDate } from '@/lib/formatters';
+import type { Release } from '@/lib/types';
 import { supabase } from '@/supabase/client';
 import ReleaseForm from './-release-form';
-import { releaseSchema, type ReleaseInput } from './-schema';
+import { type ReleaseInput, releaseSchema } from './-schema';
 
 interface Props {
   onClose: () => void;

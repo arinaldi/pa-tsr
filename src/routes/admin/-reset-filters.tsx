@@ -1,6 +1,6 @@
-import { startTransition } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { X } from 'lucide-react';
+import { startTransition } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Route } from '.';
@@ -24,10 +24,10 @@ export default function ResetFilters({ queryKeys }: Props) {
         startTransition(() => {
           navigate({
             search: (prev) => {
-              queryKeys.forEach((qk) => {
+              for (const qk of queryKeys) {
                 prev[qk as keyof AdminSearch] = undefined;
-              });
-              
+              }
+
               return {
                 ...prev,
                 page: 1,

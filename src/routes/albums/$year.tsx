@@ -1,6 +1,6 @@
-import { type FormEvent, useState } from 'react';
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { Reorder } from 'framer-motion';
+import { type FormEvent, useState } from 'react';
 
 import SubmitButton from '@/components/submit-button';
 import { useSubmit } from '@/hooks/use-submit';
@@ -27,7 +27,7 @@ export const Route = createFileRoute('/albums/$year')({
       title: `Rankings for ${year}`,
     };
   },
-})
+});
 
 function EditRankings() {
   const { favorites } = Route.useLoaderData();
@@ -88,4 +88,3 @@ function EditRankings() {
     </form>
   );
 }
-

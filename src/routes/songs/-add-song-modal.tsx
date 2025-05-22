@@ -1,7 +1,8 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useSession } from '@/components/session-provider';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -11,11 +12,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useSession } from '@/components/session-provider';
 import { useSubmit } from '@/hooks/use-submit';
 import { MESSAGES } from '@/lib/constants';
 import { supabase } from '@/supabase/client';
-import { songSchema, type SongInput } from './-schema';
+import { type SongInput, songSchema } from './-schema';
 import SongForm from './-song-form';
 
 const defaultValues = {

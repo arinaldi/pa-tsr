@@ -1,16 +1,16 @@
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { Fragment } from 'react';
-import { createFileRoute, Link } from '@tanstack/react-router'
 
+import { useSession } from '@/components/session-provider';
+import TopLink from '@/components/top-link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { useSession } from '@/components/session-provider';
-import TopLink from '@/components/top-link';
 import { ROUTE_HREF, SPOTIFY_URL } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { getAllTimeRankings } from '@/supabase/data';
 
-export const Route = createFileRoute('/albums/all-time')({
+export const Route = createFileRoute('/albums/all-time/')({
   component: AllTimeRankings,
   loader: async () => {
     const data = await getAllTimeRankings();
@@ -26,7 +26,7 @@ export const Route = createFileRoute('/albums/all-time')({
       title: 'All-time',
     };
   },
-})
+});
 
 function AllTimeRankings() {
   const { favorites } = Route.useLoaderData();
@@ -56,7 +56,7 @@ function AllTimeRankings() {
                   >
                     <span>{f.artist} &ndash;</span>{' '}
                     <a
-                      className="text-foreground hover:text-muted-foreground underline underline-offset-4"
+                      className="text-foreground underline underline-offset-4 hover:text-muted-foreground"
                       href={url}
                       rel="noopener noreferrer"
                       target="_blank"

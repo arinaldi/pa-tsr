@@ -1,4 +1,3 @@
-import { startTransition, useOptimistic } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import {
   ChevronLeft,
@@ -6,6 +5,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from 'lucide-react';
+import { startTransition, useOptimistic } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -38,7 +38,7 @@ export default function Paginate({ total }: Props) {
         search: (prev) => ({
           ...prev,
           page: value,
-        })
+        }),
       });
     });
   }
@@ -49,7 +49,7 @@ export default function Paginate({ total }: Props) {
       <Pagination className="mt-4 hidden sm:flex sm:items-center sm:justify-end">
         <div className="flex items-center gap-10">
           <PerPage />
-          <p className="text-sm font-medium">
+          <p className="font-medium text-sm">
             Page {optimisticPage.toLocaleString()} of{' '}
             {lastPage.toLocaleString()}
           </p>
@@ -128,7 +128,7 @@ export default function Paginate({ total }: Props) {
               </Button>
             </PaginationItem>
           </PaginationContent>
-          <p className="text-sm font-medium">
+          <p className="font-medium text-sm">
             Page {optimisticPage.toLocaleString()} of{' '}
             {lastPage.toLocaleString()}
           </p>

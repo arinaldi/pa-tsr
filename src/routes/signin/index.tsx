@@ -1,5 +1,5 @@
+import { createFileRoute, redirect } from '@tanstack/react-router';
 import { useState } from 'react';
-import { createFileRoute, redirect } from '@tanstack/react-router'
 
 import { ROUTES_ADMIN } from '@/lib/constants';
 import { supabase } from '@/supabase/client';
@@ -14,18 +14,17 @@ export const Route = createFileRoute('/signin/')({
     const {
       data: { session },
     } = await supabase.auth.getSession();
-  
+
     if (session) {
       return redirect({ to: ROUTES_ADMIN.base.href });
     }
-  
+
     return { title: 'Sign in' };
   },
-})
+});
 
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
+import { useForm } from 'react-hook-form';
 
 type View = 'email' | 'password' | 'otp';
 
@@ -63,4 +62,3 @@ function Signin() {
 
   return null;
 }
-

@@ -1,3 +1,4 @@
+import { PER_PAGE, SORT_DIRECTION } from '@/lib/constants';
 import {
   type AllTimeListItem,
   formatFavorites,
@@ -6,9 +7,8 @@ import {
   formatReleases,
   formatSongs,
 } from '@/lib/formatters';
-import { supabase } from '@/supabase/client';
-import { PER_PAGE, SORT_DIRECTION } from '@/lib/constants';
 import type { AdminSearch } from '@/routes/admin/-schema';
+import { supabase } from '@/supabase/client';
 
 const { ASC, DESC } = SORT_DIRECTION;
 
@@ -16,7 +16,7 @@ export async function getAlbum(id: string) {
   const { data: album, error } = await supabase
     .from('albums')
     .select('*')
-    .eq('id', parseInt(id, 10))
+    .eq('id', Number.parseInt(id, 10))
     .single();
 
   if (error) throw new Error(error.message);
@@ -92,21 +92,21 @@ async function getCdCount(searchParams: AdminSearch) {
     .eq('cd', true)
     .or(`artist.ilike.${searchTerm}, title.ilike.${searchTerm}`);
 
-    if (cd !== undefined) {
-      query = query.eq('cd', cd);
-    }
-  
-    if (favorite !== undefined) {
-      query = query.eq('favorite', favorite);
-    }
-  
-    if (studio !== undefined) {
-      query = query.eq('studio', studio);
-    }
-  
-    if (wishlist !== undefined) {
-      query = query.eq('wishlist', wishlist);
-    }
+  if (cd !== undefined) {
+    query = query.eq('cd', cd);
+  }
+
+  if (favorite !== undefined) {
+    query = query.eq('favorite', favorite);
+  }
+
+  if (studio !== undefined) {
+    query = query.eq('studio', studio);
+  }
+
+  if (wishlist !== undefined) {
+    query = query.eq('wishlist', wishlist);
+  }
 
   const { count, error } = await query;
 
@@ -161,7 +161,7 @@ export async function getCandidates(searchParams: AdminSearch) {
   let candidates: AllTimeListItem[] = [];
 
   if (search) {
-    let query = supabase
+    const query = supabase
       .from('albums')
       .select(
         `
@@ -180,7 +180,7 @@ export async function getCandidates(searchParams: AdminSearch) {
       .or(`artist.ilike.${searchTerm}, title.ilike.${searchTerm}`)
       .range(0, 24)
       .order('artist', { ascending: true });
-    
+
     const { data, error } = await query;
 
     if (error) throw new Error(error.message);

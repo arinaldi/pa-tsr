@@ -1,6 +1,7 @@
-import { type FormEvent, useState } from 'react';
 import { X } from 'lucide-react';
+import { type FormEvent, useState } from 'react';
 
+import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -11,9 +12,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import SubmitButton from '@/components/submit-button';
 import { useSubmit } from '@/hooks/use-submit';
-import { type AllTimeListItem } from '@/lib/formatters';
+import type { AllTimeListItem } from '@/lib/formatters';
 import { supabase } from '@/supabase/client';
 
 interface Props {

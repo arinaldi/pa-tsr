@@ -1,23 +1,23 @@
+import { createFileRoute } from '@tanstack/react-router';
 import { useRef, useState } from 'react';
-import { createFileRoute } from '@tanstack/react-router'
 import { toast } from 'sonner';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import InputClearButton from '@/components/input-clear-button';
 import InputSpinner from '@/components/input-spinner';
+import { useSession } from '@/components/session-provider';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
-import { useSession } from '@/components/session-provider';
 import { MESSAGES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { getArtists } from '@/supabase/data';
 import {
+  type Result,
   getAccessToken,
   getArtistAlbums,
   getArtistId,
   sortByDateDesc,
-  type Result,
 } from './-helpers';
 import Random from './-random';
 
@@ -31,7 +31,7 @@ export const Route = createFileRoute('/artists/')({
       title: 'Artists',
     };
   },
-})
+});
 
 interface State {
   artist: string;
@@ -126,7 +126,7 @@ function Artists() {
                   <div key={a}>
                     <Button
                       className={cn(
-                        'text-foreground block h-auto px-0 py-0.5 text-left text-sm',
+                        'block h-auto px-0 py-0.5 text-left text-foreground text-sm',
                         results.artist === a ? 'font-semibold' : 'font-normal',
                       )}
                       disabled={fetching}
@@ -160,7 +160,7 @@ function Artists() {
         {results.data.length > 0 && (
           <ScrollArea className="max-h-[400px] rounded-md border sm:max-h-[800px]">
             <div className="p-4">
-              <h4 className="text-sm font-medium">
+              <h4 className="font-medium text-sm">
                 {results.data.length.toLocaleString()}{' '}
                 {results.data.length === 1 ? 'release' : 'releases'}
               </h4>
@@ -169,7 +169,7 @@ function Artists() {
                   <li className="space-y-1 text-sm" key={item.id}>
                     <a
                       className={cn(
-                        'hover:text-muted-foreground block underline underline-offset-4',
+                        'block underline underline-offset-4 hover:text-muted-foreground',
                         item.type === 'album' ? 'font-medium' : 'font-light',
                       )}
                       href={item.href}
@@ -178,7 +178,7 @@ function Artists() {
                     >
                       {item.name}
                     </a>
-                    <p className="text-muted-foreground font-light">
+                    <p className="font-light text-muted-foreground">
                       {item.date}
                     </p>
                   </li>

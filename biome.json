@@ -20,6 +20,16 @@
   "linter": {
     "enabled": true,
     "rules": {
+      "nursery": {
+        "useSortedClasses": {
+          "fix": "safe",
+          "level": "error",
+          "options": {
+            "attributes": ["className"],
+            "functions": ["cn"]
+          }
+        }
+      },
       "recommended": true
     }
   },

@@ -1,7 +1,8 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 
+import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -18,12 +19,11 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from '@/components/ui/input-otp';
-import SubmitButton from '@/components/submit-button';
 import { useMobile } from '@/hooks/use-mobile';
 import { useSubmit } from '@/hooks/use-submit';
 import { EMAIL, MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
 import { supabase } from '@/supabase/client';
-import { verifyOtpSchema, type VerifyOtpInput } from './-schema';
+import { type VerifyOtpInput, verifyOtpSchema } from './-schema';
 
 interface Props {
   email: string;

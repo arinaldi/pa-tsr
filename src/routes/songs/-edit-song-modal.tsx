@@ -1,5 +1,5 @@
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 import {
   DialogContent,
@@ -8,10 +8,10 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { useSubmit } from '@/hooks/use-submit';
-import type { Song } from '@/lib/types';
 import { MESSAGES } from '@/lib/constants';
+import type { Song } from '@/lib/types';
 import { supabase } from '@/supabase/client';
-import { songSchema, type SongInput } from './-schema';
+import { type SongInput, songSchema } from './-schema';
 import SongForm from './-song-form';
 
 interface Props {

@@ -1,6 +1,7 @@
-import { type UseFormReturn } from 'react-hook-form';
 import { Lock, SendHorizontal } from 'lucide-react';
+import type { UseFormReturn } from 'react-hook-form';
 
+import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -11,7 +12,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import SubmitButton from '@/components/submit-button';
 import { useMobile } from '@/hooks/use-mobile';
 import { useSubmit } from '@/hooks/use-submit';
 import { EMAIL, MESSAGES } from '@/lib/constants';
@@ -88,8 +88,8 @@ export default function EmailForm({
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
-        <div className="relative flex justify-center text-xs tracking-wider uppercase">
-          <span className="bg-background text-muted-foreground px-2">
+        <div className="relative flex justify-center text-xs uppercase tracking-wider">
+          <span className="bg-background px-2 text-muted-foreground">
             or continue with
           </span>
         </div>

@@ -1,10 +1,10 @@
-import { startTransition } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { ArrowDown } from 'lucide-react';
+import { startTransition } from 'react';
 
-import { cn } from '@/lib/utils';
-import type { Children } from '@/lib/types';
 import { TableHead } from '@/components/ui/table';
+import type { Children } from '@/lib/types';
+import { cn } from '@/lib/utils';
 import { Route } from '.';
 
 interface Props extends Children {
@@ -34,14 +34,14 @@ export default function SortableColumn({
         search: (prev) => ({
           ...prev,
           sort: newSort ?? undefined,
-        })
+        }),
       });
     });
   }
 
   return (
     <TableHead
-      className={cn(`cursor-pointer`, wrapperClassName)}
+      className={cn('cursor-pointer', wrapperClassName)}
       onClick={onClick}
       scope="col"
     >

@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
+import { Fragment } from 'react';
 
 import { DECADES } from '@/lib/constants';
 
@@ -11,7 +11,7 @@ export default function DecadeLink() {
       {DECADES.map((d, index) => (
         <Fragment key={d.id}>
           <Link
-            className="hover:text-muted-foreground underline underline-offset-4"
+            className="underline underline-offset-4 hover:text-muted-foreground"
             hash={d.id}
             to={pathname}
           >

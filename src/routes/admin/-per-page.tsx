@@ -1,5 +1,5 @@
-import { startTransition, useOptimistic } from 'react';
 import { useNavigate } from '@tanstack/react-router';
+import { startTransition, useOptimistic } from 'react';
 
 import {
   Select,
@@ -13,7 +13,7 @@ import { Route } from '.';
 
 const { SMALL, MEDIUM, LARGE } = PER_PAGE;
 
-export default function PerPage() {;
+export default function PerPage() {
   const navigate = useNavigate({ from: Route.fullPath });
   const searchParams = Route.useSearch();
   const perPage = searchParams.perPage ?? PER_PAGE.SMALL;
@@ -28,15 +28,15 @@ export default function PerPage() {;
         search: (prev) => ({
           ...prev,
           page: 1,
-          perPage: parseInt(value, 10),
-        })
+          perPage: Number.parseInt(value, 10),
+        }),
       });
     });
   }
 
   return (
     <div className="flex items-center gap-x-2">
-      <p className="text-sm font-medium">Rows per page</p>
+      <p className="font-medium text-sm">Rows per page</p>
       <Select onValueChange={onValueChange} value={optimisticValue}>
         <SelectTrigger className="h-8">
           <SelectValue />
