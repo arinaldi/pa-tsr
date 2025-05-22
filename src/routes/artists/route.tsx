@@ -21,7 +21,7 @@ import {
 } from './-helpers';
 import Random from './-random';
 
-export const Route = createFileRoute('/artists/')({
+export const Route = createFileRoute('/artists')({
   component: Artists,
   loader: async () => {
     const data = await getArtists();

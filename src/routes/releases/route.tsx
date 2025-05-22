@@ -7,7 +7,7 @@ import { getReleases } from '@/supabase/data';
 import AddReleaseModal from './-add-release-modal';
 import ReleaseActions from './-release-actions';
 
-export const Route = createFileRoute('/releases/')({
+export const Route = createFileRoute('/releases')({
   component: NewReleases,
   loader: async () => {
     const data = await getReleases();

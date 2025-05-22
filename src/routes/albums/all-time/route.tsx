@@ -10,7 +10,7 @@ import { ROUTE_HREF, SPOTIFY_URL } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { getAllTimeRankings } from '@/supabase/data';
 
-export const Route = createFileRoute('/albums/all-time/')({
+export const Route = createFileRoute('/albums/all-time')({
   component: AllTimeRankings,
   loader: async () => {
     const data = await getAllTimeRankings();

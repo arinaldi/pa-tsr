@@ -6,7 +6,7 @@ import AddSongModal from './-add-song-modal';
 import LetterLink from './-letter-link';
 import SongActions from './-song-actions';
 
-export const Route = createFileRoute('/songs/')({
+export const Route = createFileRoute('/songs')({
   component: FeaturedSongs,
   loader: async () => {
     const data = await getSongs();

@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { PER_PAGE } from '@/lib/constants';
-import { Route } from '.';
+import { Route } from './route';
 
 const { SMALL, MEDIUM, LARGE } = PER_PAGE;
 

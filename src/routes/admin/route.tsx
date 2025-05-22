@@ -25,7 +25,7 @@ import Search from './-search';
 import SortableColumn from './-sortable-column';
 import TableLink from './-table-link';
 
-export const Route = createFileRoute('/admin/')({
+export const Route = createFileRoute('/admin')({
   component: Admin,
   loaderDeps: ({ search }) => ({ search}),
   loader: async ({ deps }) => {

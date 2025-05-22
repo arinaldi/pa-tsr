@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/playlist/')({
+export const Route = createFileRoute('/playlist')({
   component: Playlist,
   loader: () => ({ title: 'Playlist' }),
 })

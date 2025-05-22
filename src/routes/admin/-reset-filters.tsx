@@ -3,7 +3,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Route } from '.';
+import { Route } from './route';
 import type { AdminSearch } from './-schema';
 
 interface Props {
