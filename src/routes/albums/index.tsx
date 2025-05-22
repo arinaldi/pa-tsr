@@ -1,18 +1,17 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { Pencil } from 'lucide-react';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import TopLink from '@/components/top-link';
 import { useSession } from '@/components/session-provider';
 import { ROUTE_HREF, SPOTIFY_URL } from '@/lib/constants';
-import { capitalizeFirstLetter } from '@/lib/utils';
 import { getFavorites } from '@/supabase/data';
 import DecadeLink from './-decade-link';
 
@@ -42,7 +41,10 @@ function TopAlbums() {
             <Card key={year}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle id={year}>{capitalizeFirstLetter(year)}</CardTitle>
+                  <CardTitle className="flex items-center gap-2" id={year}>
+                    {year}
+                    <Badge variant="secondary">{favorites.length.toLocaleString()}</Badge>
+                  </CardTitle>
                   {session && (
                     <Link to={ROUTE_HREF.EDIT_RANKINGS.replace(':year', year)}>
                       <Button size="icon" variant="outline">
@@ -51,10 +53,6 @@ function TopAlbums() {
                     </Link>
                   )}
                 </div>
-                <CardDescription>
-                  {favorites.length.toLocaleString()} album
-                  {favorites.length > 1 && 's'}
-                </CardDescription>
               </CardHeader>
               <CardContent>
                 <ol className="ml-4 list-decimal space-y-1">
