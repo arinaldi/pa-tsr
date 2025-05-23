@@ -26,11 +26,10 @@ import SortableColumn from './-sortable-column';
 import TableLink from './-table-link';
 
 export const Route = createFileRoute('/admin/')({
+  beforeLoad: validateSession,
   component: Admin,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({ deps }) => {
-    await validateSession();
-
     const data = await getAdminData(deps.search);
 
     return {

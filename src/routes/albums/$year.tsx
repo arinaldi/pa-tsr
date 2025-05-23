@@ -10,10 +10,9 @@ import { getRankingsByYear } from '@/supabase/data';
 import AlbumCard from './-album-card';
 
 export const Route = createFileRoute('/albums/$year')({
+  beforeLoad: validateSession,
   component: EditRankings,
   loader: async ({ params: { year } }) => {
-    await validateSession();
-
     const data = await getRankingsByYear(year);
 
     return {

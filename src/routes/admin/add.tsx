@@ -9,10 +9,9 @@ import AlbumForm from './-album-form';
 import { type AlbumInput, albumSchema } from './-schema';
 
 export const Route = createFileRoute('/admin/add')({
+  beforeLoad: validateSession,
   component: AddAlbum,
   loader: async () => {
-    await validateSession();
-
     return {
       parents: [
         {

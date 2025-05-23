@@ -71,6 +71,7 @@ export const ROUTE_HREF = {
   EDIT_RANKINGS: '/albums/:year',
   FEATURED_SONGS: '/songs',
   NEW_RELEASES: '/releases',
+  NOT_FOUND: '/not-found',
   PLAYLIST: '/playlist',
   SANDBOX: '/sandbox',
   SIGNIN: '/signin',

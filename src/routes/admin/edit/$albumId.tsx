@@ -12,10 +12,9 @@ import DeleteAlbumModal from '../-delete-album-modal';
 import { type AlbumInput, albumSchema } from '../-schema';
 
 export const Route = createFileRoute('/admin/edit/$albumId')({
+  beforeLoad: validateSession,
   component: EditAlbum,
   loader: async ({ params: { albumId } }) => {
-    await validateSession();
-
     const data = await getAlbum(albumId);
 
     return {

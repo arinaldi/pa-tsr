@@ -14,11 +14,10 @@ import AlbumCard from '../-album-card';
 import Search from './-search';
 
 export const Route = createFileRoute('/albums/all-time/edit')({
+  beforeLoad: validateSession,
   component: EditAllTimeRankings,
   loaderDeps: ({ search }) => ({ search }),
   loader: async ({ deps }) => {
-    await validateSession();
-
     const data = await getAllTimeData(deps.search);
 
     return {

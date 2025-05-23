@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { redirect } from '@tanstack/react-router';
 
+import { ROUTE_HREF } from '@/lib/constants';
 import type { Database } from './db-types';
 
 export const supabase = createClient<Database>(
@@ -14,7 +15,7 @@ export async function validateSession() {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    throw redirect({ to: '/not-found' });
+    throw redirect({ to: ROUTE_HREF.NOT_FOUND });
   }
 
   return true;
