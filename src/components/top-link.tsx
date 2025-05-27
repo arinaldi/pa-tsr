@@ -6,7 +6,7 @@ export default function TopLink() {
 
   return (
     <Link
-      className="text-muted-foreground fixed right-0 bottom-0 p-5 text-sm"
+      className="fixed right-0 bottom-0 p-5 text-muted-foreground text-sm"
       hash="top"
       to={location.pathname}
     >

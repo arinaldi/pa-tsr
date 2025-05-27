@@ -87,12 +87,9 @@ export default function DeleteAlbumModal({ album, className = '' }: Props) {
         <DrawerContent>
           <form action={action}>
             <DrawerHeader className="text-left">
-              <DrawerTitle>
-                Are you sure you want to delete {album.artist} &ndash;{' '}
-                {album.title}?
-              </DrawerTitle>
+              <DrawerTitle>Are you sure?</DrawerTitle>
               <DrawerDescription>
-                This action cannot be undone
+                {album.artist} &ndash; {album.title}
               </DrawerDescription>
             </DrawerHeader>
             <div className="space-y-8 px-4">
@@ -127,11 +124,10 @@ export default function DeleteAlbumModal({ album, className = '' }: Props) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            Are you sure you want to delete {album.artist} &ndash; {album.title}
-            ?
-          </DialogTitle>
-          <DialogDescription>This action cannot be undone</DialogDescription>
+          <DialogTitle>Are you sure?</DialogTitle>
+          <DialogDescription>
+            {album.artist} &ndash; {album.title}
+          </DialogDescription>
         </DialogHeader>
         <form action={action}>
           <DialogFooter>

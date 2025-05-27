@@ -54,10 +54,10 @@ export default function RemoveAllTimeRankingModal({ item, removeItem }: Props) {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            Are you sure you want to remove this all-time ranking?
-          </DialogTitle>
-          <DialogDescription>This action cannot be undone</DialogDescription>
+          <DialogTitle>Are you sure?</DialogTitle>
+          <DialogDescription>
+            {item.artist} &ndash; {item.title}
+          </DialogDescription>
         </DialogHeader>
         <form onSubmit={onSubmit}>
           <DialogFooter>
