@@ -65,6 +65,7 @@ export default function Search(props: ComponentProps<'input'>) {
   return (
     <div className="relative">
       <Input
+        autoFocus
         defaultValue={defaultValue}
         name="search"
         onChange={onSearch}
