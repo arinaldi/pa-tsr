@@ -15,8 +15,8 @@ const { SMALL, MEDIUM, LARGE } = PER_PAGE;
 
 export default function PerPage() {
   const navigate = useNavigate({ from: Route.fullPath });
-  const searchParams = Route.useSearch();
-  const perPage = searchParams.perPage ?? PER_PAGE.SMALL;
+  const perPage =
+    Route.useSearch({ select: (search) => search.perPage }) ?? PER_PAGE.SMALL;
   const [optimisticValue, setOptimisticValue] = useOptimistic(
     perPage.toString(),
   );

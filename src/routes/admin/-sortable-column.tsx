@@ -18,7 +18,7 @@ export default function SortableColumn({
   wrapperClassName = '',
 }: Props) {
   const navigate = useNavigate({ from: Route.fullPath });
-  const { sort } = Route.useSearch();
+  const sort = Route.useSearch({ select: (search) => search.sort });
   const [sortProp, desc] = sort?.split(':') ?? [];
   let newSort: string | null = null;
 

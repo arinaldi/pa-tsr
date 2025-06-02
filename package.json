@@ -6,6 +6,7 @@
     "dev": "vite --port 3009",
     "start": "vite --port 3009",
     "build": "tsc -b && vite build",
+    "build:test": "tsc -b && vite build --base=./",
     "serve": "vite preview",
     "test": "vitest run",
     "format": "biome format",

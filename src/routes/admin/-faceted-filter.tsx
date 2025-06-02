@@ -33,9 +33,10 @@ const options = [
 
 export default function FacetedFilter({ queryKey, title }: Props) {
   const navigate = useNavigate({ from: Route.fullPath });
-  const searchParams = Route.useSearch();
+  const initialValue = Route.useSearch({
+    select: (search) => search[queryKey as keyof AdminSearch] ?? '',
+  });
   const [open, setOpen] = useState(false);
-  const initialValue = searchParams[queryKey as keyof AdminSearch] ?? '';
   const [optimisticValue, setOptimisticValue] = useOptimistic(initialValue);
   const selectedOption = options.find(
     (o) => o.value === optimisticValue.toString(),

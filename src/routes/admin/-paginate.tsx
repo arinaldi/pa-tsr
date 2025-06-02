@@ -23,9 +23,12 @@ interface Props {
 
 export default function Paginate({ total }: Props) {
   const navigate = useNavigate({ from: Route.fullPath });
-  const searchParams = Route.useSearch();
-  const page = searchParams.page ?? 1;
-  const perPage = searchParams.perPage ?? PER_PAGE.SMALL;
+  const { page, perPage } = Route.useSearch({
+    select: (search) => ({
+      page: search.page ?? 1,
+      perPage: search.perPage ?? PER_PAGE.SMALL,
+    }),
+  });
   const [optimisticPage, setOptimisticPage] = useOptimistic(page);
   const lastPage = Math.ceil(total / perPage);
   const isFirstPage = optimisticPage === 1;

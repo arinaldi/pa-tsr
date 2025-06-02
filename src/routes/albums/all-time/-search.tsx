@@ -15,7 +15,7 @@ import { Route } from './edit';
 
 export default function Search(props: ComponentProps<'input'>) {
   const navigate = useNavigate({ from: Route.fullPath });
-  const { search } = Route.useSearch();
+  const search = Route.useSearch({ select: (search) => search.search });
   const defaultValue = search ?? '';
   const [pending, startTransition] = useTransition();
   const inputRef = useRef<HTMLInputElement | null>(null);

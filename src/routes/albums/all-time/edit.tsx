@@ -40,9 +40,8 @@ export const Route = createFileRoute('/albums/all-time/edit')({
 
 function EditAllTimeRankings() {
   const { candidates, favorites } = Route.useLoaderData();
-  const searchParams = Route.useSearch();
+  const search = Route.useSearch({ select: (search) => search.search });
   const navigate = useNavigate();
-  const search = searchParams.search ?? '';
   const [items, setItems] = useState(favorites);
 
   function removeItem(id: number) {
