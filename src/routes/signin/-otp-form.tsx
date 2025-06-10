@@ -12,7 +12,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import {
   InputOTP,
   InputOTPGroup,
@@ -36,7 +35,6 @@ export default function OtpForm({ email, onCancel }: Props) {
   const form = useForm({
     defaultValues: {
       code: '',
-      email,
     },
     resolver: zodResolver(verifyOtpSchema),
   });
@@ -44,7 +42,7 @@ export default function OtpForm({ email, onCancel }: Props) {
   const { onSubmit, submitting } = useSubmit({
     callbacks: [() => navigate({ to: ROUTES_ADMIN.base.href })],
     handleSubmit: form.handleSubmit,
-    submitFn: async ({ code, email }: VerifyOtpInput) => {
+    submitFn: async ({ code }: VerifyOtpInput) => {
       if (email !== EMAIL) {
         throw new Error(MESSAGES.INVALID_DATA);
       }
@@ -65,17 +63,6 @@ export default function OtpForm({ email, onCancel }: Props) {
     <div className="max-w-sm">
       <Form {...form}>
         <form onSubmit={onSubmit}>
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="hidden">
-                <FormControl>
-                  <Input type="email" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="code"

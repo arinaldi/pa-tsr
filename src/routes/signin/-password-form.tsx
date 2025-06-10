@@ -13,7 +13,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { useMobile } from '@/hooks/use-mobile';
 import { useSubmit } from '@/hooks/use-submit';
 import { EMAIL, MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
@@ -30,7 +29,6 @@ export default function PasswordForm({ email, onCancel }: Props) {
   const mobile = useMobile();
   const form = useForm({
     defaultValues: {
-      email,
       password: '',
     },
     resolver: zodResolver(signInSchema),
@@ -39,7 +37,7 @@ export default function PasswordForm({ email, onCancel }: Props) {
   const { onSubmit, submitting } = useSubmit({
     callbacks: [() => navigate({ to: ROUTES_ADMIN.base.href })],
     handleSubmit: form.handleSubmit,
-    submitFn: async ({ email, password }: SignInInput) => {
+    submitFn: async ({ password }: SignInInput) => {
       if (email !== EMAIL) {
         throw new Error(MESSAGES.INVALID_DATA);
       }
@@ -59,17 +57,6 @@ export default function PasswordForm({ email, onCancel }: Props) {
     <div className="max-w-sm">
       <Form {...form}>
         <form onSubmit={onSubmit}>
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="hidden">
-                <FormControl>
-                  <Input type="email" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="password"

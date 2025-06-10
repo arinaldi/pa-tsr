@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 export const releaseSchema = z.object({
   artist: z.string().min(1).max(128),

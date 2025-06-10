@@ -1,6 +1,6 @@
-import { z } from 'zod'
+import { z } from 'zod/v4';
 
-import { PER_PAGE } from '@/lib/constants'
+import { PER_PAGE } from '@/lib/constants';
 
 export const adminSearchSchema = z.object({
   cd: z.boolean().optional(),
@@ -11,9 +11,9 @@ export const adminSearchSchema = z.object({
   sort: z.string().catch('').optional(),
   studio: z.boolean().optional(),
   wishlist: z.boolean().optional(),
-})
+});
 
-export type AdminSearch = z.infer<typeof adminSearchSchema>
+export type AdminSearch = z.infer<typeof adminSearchSchema>;
 
 export const albumSchema = z.object({
   artist: z.string().min(1).max(128),

@@ -13,10 +13,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import type { AlbumInput } from './-schema';
 
 interface Props {
-  form: UseFormReturn<AlbumInput>;
+  form: UseFormReturn<any>;
   onSubmit: (event: FormEvent<Element>) => Promise<void>;
   submitting: boolean;
 }
