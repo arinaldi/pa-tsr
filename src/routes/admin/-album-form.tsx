@@ -57,7 +57,12 @@ export default function AlbumForm({ form, onSubmit, submitting }: Props) {
             <FormItem>
               <FormLabel>Year</FormLabel>
               <FormControl>
-                <Input inputMode="numeric" type="number" {...field} />
+                <Input
+                  inputMode="numeric"
+                  type="number"
+                  {...field}
+                  onChange={(event) => field.onChange(+event.target.value)}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
