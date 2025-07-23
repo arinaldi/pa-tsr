@@ -10,11 +10,9 @@ export const supabase = createClient<Database>(
 );
 
 export async function validateSession() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { data } = await supabase.auth.getClaims();
 
-  if (!session) {
+  if (!data) {
     throw redirect({ to: ROUTE_HREF.NOT_FOUND });
   }
 

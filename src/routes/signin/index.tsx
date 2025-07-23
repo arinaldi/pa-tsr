@@ -11,11 +11,9 @@ import { emailSchema } from './-schema';
 export const Route = createFileRoute('/signin/')({
   component: Signin,
   loader: async () => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
+    const { data } = await supabase.auth.getClaims();
 
-    if (session) {
+    if (data) {
       return redirect({ to: ROUTES_ADMIN.base.href });
     }
 

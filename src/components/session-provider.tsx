@@ -1,7 +1,7 @@
+import type { Session } from '@supabase/supabase-js';
 import { createContext, use, useEffect, useState } from 'react';
-import { type Session } from '@supabase/supabase-js';
 
-import { type Children } from '@/lib/types';
+import type { Children } from '@/lib/types';
 import { supabase } from '@/supabase/client';
 
 interface Context {
