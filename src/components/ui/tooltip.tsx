@@ -1,16 +1,16 @@
-import { Tooltip as TooltipPrimitive } from 'radix-ui';
+import { Tooltip as TooltipPrimitive } from '@base-ui-components/react/tooltip';
 import type * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
 function TooltipProvider({
-  delayDuration = 0,
+  delay = 0,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
   return (
     <TooltipPrimitive.Provider
       data-slot="tooltip-provider"
-      delayDuration={delayDuration}
+      delay={delay}
       {...props}
     />
   );
@@ -32,28 +32,66 @@ function TooltipTrigger({
   return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />;
 }
 
-function TooltipContent({
+function TooltipPositioner({
   className,
-  sideOffset = 0,
-  children,
   ...props
-}: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+}: React.ComponentProps<typeof TooltipPrimitive.Positioner>) {
   return (
     <TooltipPrimitive.Portal>
-      <TooltipPrimitive.Content
-        data-slot="tooltip-content"
-        sideOffset={sideOffset}
-        className={cn(
-          'fade-in-0 zoom-in-95 data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) animate-in text-balance rounded-md bg-primary px-3 py-1.5 text-primary-foreground text-xs data-[state=closed]:animate-out',
-          className,
-        )}
+      <TooltipPrimitive.Positioner
+        data-slot="tooltip-positioner"
+        sideOffset={8}
+        className={cn('z-50', className)}
         {...props}
-      >
-        {children}
-        <TooltipPrimitive.Arrow className="z-50 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px] bg-primary fill-primary" />
-      </TooltipPrimitive.Content>
+      />
     </TooltipPrimitive.Portal>
   );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+function TooltipContent({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Popup>) {
+  return (
+    <TooltipPrimitive.Popup
+      data-slot="tooltip-content"
+      className={cn(
+        'fade-in-0 zoom-in-95 data-[closed]:fade-out-0 data-[closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-(--radix-tooltip-content-transform-origin) animate-in text-balance rounded-md bg-primary px-3 py-1.5 text-primary-foreground text-xs data-[closed]:animate-out',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <TooltipArrow />
+    </TooltipPrimitive.Popup>
+  );
+}
+
+function TooltipArrow({
+  className,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Arrow>) {
+  return (
+    <TooltipPrimitive.Arrow
+      data-slot="tooltip-arrow"
+      className={cn(
+        'z-50 size-2.5 rotate-45 rounded-[2px] bg-primary fill-primary',
+        'data-[side=bottom]:-translate-y-1/2 data-[side=bottom]:top-px',
+        'data-[side=top]:bottom-px data-[side=top]:translate-y-1/2',
+        'data-[side=left]:right-px data-[side=left]:translate-x-1/2',
+        'data-[side=right]:-translate-x-1/2 data-[side=right]:left-px',
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+export {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
+  TooltipPositioner,
+};

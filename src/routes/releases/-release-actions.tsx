@@ -7,8 +7,10 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPositioner,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
@@ -44,34 +46,42 @@ export default function ReleaseActions({ release }: Props) {
       onOpenChange={(open) => setModal((m) => ({ ...m, open }))}
     >
       <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
-          <Button className="size-6 shrink-0" variant="ghost">
-            <span className="sr-only">Open menu</span>
-            <EllipsisVertical className="size-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DialogTrigger
-            asChild
-            onClick={() => setModal((m) => ({ ...m, type: 'edit' }))}
-          >
-            <DropdownMenuItem className="flex items-center gap-2">
-              <Pencil className="size-4" />
-              Edit
-            </DropdownMenuItem>
-          </DialogTrigger>
-          <DialogTrigger
-            asChild
-            onClick={() => setModal((m) => ({ ...m, type: 'delete' }))}
-          >
-            <DropdownMenuItem className="flex items-center gap-2">
-              <Trash className="size-4" />
-              Delete
-            </DropdownMenuItem>
-          </DialogTrigger>
-        </DropdownMenuContent>
+        <DropdownMenuTrigger
+          render={
+            <Button className="size-6 shrink-0" variant="ghost">
+              <span className="sr-only">Open menu</span>
+              <EllipsisVertical className="size-4" />
+            </Button>
+          }
+        />
+        <DropdownMenuPositioner align="end">
+          <DropdownMenuContent>
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DialogTrigger
+                onClick={() => setModal((m) => ({ ...m, type: 'edit' }))}
+                nativeButton={false}
+                render={
+                  <DropdownMenuItem className="flex items-center gap-2">
+                    <Pencil className="size-4" />
+                    Edit
+                  </DropdownMenuItem>
+                }
+              />
+              <DialogTrigger
+                onClick={() => setModal((m) => ({ ...m, type: 'delete' }))}
+                nativeButton={false}
+                render={
+                  <DropdownMenuItem className="flex items-center gap-2">
+                    <Trash className="size-4" />
+                    Delete
+                  </DropdownMenuItem>
+                }
+              />
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenuPositioner>
       </DropdownMenu>
       {modal.type === 'edit' && (
         <EditReleaseModal onClose={onClose} release={release} />

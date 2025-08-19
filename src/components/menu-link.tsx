@@ -8,8 +8,8 @@ import {
   SidebarMenuSubItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { cn } from '@/lib/utils';
 import type { Route } from '@/lib/types';
+import { cn } from '@/lib/utils';
 
 interface Props {
   route: Route;
@@ -29,28 +29,31 @@ export default function MenuLink({ route }: Props) {
 
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton asChild isActive={active}>
-        <Link onClick={closeMobile} to={href}>
-          {({ isActive }) => (
-            <>
-              <route.icon
-                className={cn(
-                  isActive && parentActive ? '' : 'text-muted-foreground',
-                )}
-              />
-              <span
-                className={cn(
-                  isActive && parentActive
-                    ? 'font-medium'
-                    : 'text-muted-foreground',
-                )}
-              >
-                {label}
-              </span>
-            </>
-          )}
-        </Link>
-      </SidebarMenuButton>
+      <SidebarMenuButton
+        isActive={active}
+        render={
+          <Link onClick={closeMobile} to={href}>
+            {({ isActive }) => (
+              <>
+                <route.icon
+                  className={cn(
+                    isActive && parentActive ? '' : 'text-muted-foreground',
+                  )}
+                />
+                <span
+                  className={cn(
+                    isActive && parentActive
+                      ? 'font-medium'
+                      : 'text-muted-foreground',
+                  )}
+                >
+                  {label}
+                </span>
+              </>
+            )}
+          </Link>
+        }
+      />
       {items && (
         <SidebarMenuSub>
           {items.map((item) => {
@@ -58,19 +61,22 @@ export default function MenuLink({ route }: Props) {
 
             return (
               <SidebarMenuSubItem key={item.label}>
-                <SidebarMenuSubButton asChild isActive={subActive}>
-                  <Link onClick={closeMobile} to={item.href}>
-                    {({ isActive }) => (
-                      <span
-                        className={cn(
-                          isActive ? 'font-medium' : 'text-muted-foreground',
-                        )}
-                      >
-                        {item.label}
-                      </span>
-                    )}
-                  </Link>
-                </SidebarMenuSubButton>
+                <SidebarMenuSubButton
+                  isActive={subActive}
+                  render={
+                    <Link onClick={closeMobile} to={item.href}>
+                      {({ isActive }) => (
+                        <span
+                          className={cn(
+                            isActive ? 'font-medium' : 'text-muted-foreground',
+                          )}
+                        >
+                          {item.label}
+                        </span>
+                      )}
+                    </Link>
+                  }
+                />
               </SidebarMenuSubItem>
             );
           })}
