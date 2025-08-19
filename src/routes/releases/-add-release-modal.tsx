@@ -41,7 +41,6 @@ export default function AddReleaseModal() {
     callbacks: [onClose],
     handleSubmit: form.handleSubmit,
     submitFn: async (data: ReleaseInput) => {
-      console.log('add');
       const { error } = await supabase.from('releases').insert({
         ...data,
         date: data.date || null,

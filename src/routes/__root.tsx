@@ -1,5 +1,5 @@
 import { createRootRoute } from '@tanstack/react-router';
-// import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 import AppSidebar from '@/components/app-sidebar';
 import { SessionProvider } from '@/components/session-provider';
@@ -13,7 +13,7 @@ export const Route = createRootRoute({
       <ThemeProvider>
         <AppSidebar />
         <TailwindIndicator />
-        {/* <TanStackRouterDevtools /> */}
+        <TanStackRouterDevtools />
         <Toaster position="top-right" richColors />
       </ThemeProvider>
     </SessionProvider>

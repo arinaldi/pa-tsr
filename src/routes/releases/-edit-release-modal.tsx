@@ -34,7 +34,6 @@ export default function EditReleaseModal({ onClose, release }: Props) {
     callbacks: [onClose],
     handleSubmit: form.handleSubmit,
     submitFn: async (data: ReleaseInput) => {
-      console.log('edit', data);
       const { error } = await supabase
         .from('releases')
         .update({
