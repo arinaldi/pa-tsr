@@ -8,230 +8,98 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignoutRouteImport } from './routes/signout'
+import { Route as NotFoundRouteImport } from './routes/not-found'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as SongsIndexRouteImport } from './routes/songs/index'
+import { Route as SigninIndexRouteImport } from './routes/signin/index'
+import { Route as ReleasesIndexRouteImport } from './routes/releases/index'
+import { Route as PlaylistIndexRouteImport } from './routes/playlist/index'
+import { Route as ArtistsIndexRouteImport } from './routes/artists/index'
+import { Route as AlbumsIndexRouteImport } from './routes/albums/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AlbumsYearRouteImport } from './routes/albums/$year'
+import { Route as AdminAddRouteImport } from './routes/admin/add'
+import { Route as AlbumsAllTimeIndexRouteImport } from './routes/albums/all-time/index'
+import { Route as AlbumsAllTimeEditRouteImport } from './routes/albums/all-time/edit'
+import { Route as AdminEditAlbumIdRouteImport } from './routes/admin/edit/$albumId'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as SignoutImport } from './routes/signout'
-import { Route as NotFoundImport } from './routes/not-found'
-import { Route as IndexImport } from './routes/index'
-import { Route as SongsIndexImport } from './routes/songs/index'
-import { Route as SigninIndexImport } from './routes/signin/index'
-import { Route as ReleasesIndexImport } from './routes/releases/index'
-import { Route as PlaylistIndexImport } from './routes/playlist/index'
-import { Route as ArtistsIndexImport } from './routes/artists/index'
-import { Route as AlbumsIndexImport } from './routes/albums/index'
-import { Route as AdminIndexImport } from './routes/admin/index'
-import { Route as AlbumsYearImport } from './routes/albums/$year'
-import { Route as AdminAddImport } from './routes/admin/add'
-import { Route as AlbumsAllTimeIndexImport } from './routes/albums/all-time/index'
-import { Route as AlbumsAllTimeEditImport } from './routes/albums/all-time/edit'
-import { Route as AdminEditAlbumIdImport } from './routes/admin/edit/$albumId'
-
-// Create/Update Routes
-
-const SignoutRoute = SignoutImport.update({
+const SignoutRoute = SignoutRouteImport.update({
   id: '/signout',
   path: '/signout',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const NotFoundRoute = NotFoundImport.update({
+const NotFoundRoute = NotFoundRouteImport.update({
   id: '/not-found',
   path: '/not-found',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SongsIndexRoute = SongsIndexImport.update({
+const SongsIndexRoute = SongsIndexRouteImport.update({
   id: '/songs/',
   path: '/songs/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const SigninIndexRoute = SigninIndexImport.update({
+const SigninIndexRoute = SigninIndexRouteImport.update({
   id: '/signin/',
   path: '/signin/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ReleasesIndexRoute = ReleasesIndexImport.update({
+const ReleasesIndexRoute = ReleasesIndexRouteImport.update({
   id: '/releases/',
   path: '/releases/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PlaylistIndexRoute = PlaylistIndexImport.update({
+const PlaylistIndexRoute = PlaylistIndexRouteImport.update({
   id: '/playlist/',
   path: '/playlist/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const ArtistsIndexRoute = ArtistsIndexImport.update({
+const ArtistsIndexRoute = ArtistsIndexRouteImport.update({
   id: '/artists/',
   path: '/artists/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AlbumsIndexRoute = AlbumsIndexImport.update({
+const AlbumsIndexRoute = AlbumsIndexRouteImport.update({
   id: '/albums/',
   path: '/albums/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AdminIndexRoute = AdminIndexImport.update({
+const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AlbumsYearRoute = AlbumsYearImport.update({
+const AlbumsYearRoute = AlbumsYearRouteImport.update({
   id: '/albums/$year',
   path: '/albums/$year',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AdminAddRoute = AdminAddImport.update({
+const AdminAddRoute = AdminAddRouteImport.update({
   id: '/admin/add',
   path: '/admin/add',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AlbumsAllTimeIndexRoute = AlbumsAllTimeIndexImport.update({
+const AlbumsAllTimeIndexRoute = AlbumsAllTimeIndexRouteImport.update({
   id: '/albums/all-time/',
   path: '/albums/all-time/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AlbumsAllTimeEditRoute = AlbumsAllTimeEditImport.update({
+const AlbumsAllTimeEditRoute = AlbumsAllTimeEditRouteImport.update({
   id: '/albums/all-time/edit',
   path: '/albums/all-time/edit',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AdminEditAlbumIdRoute = AdminEditAlbumIdImport.update({
+const AdminEditAlbumIdRoute = AdminEditAlbumIdRouteImport.update({
   id: '/admin/edit/$albumId',
   path: '/admin/edit/$albumId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/not-found': {
-      id: '/not-found'
-      path: '/not-found'
-      fullPath: '/not-found'
-      preLoaderRoute: typeof NotFoundImport
-      parentRoute: typeof rootRoute
-    }
-    '/signout': {
-      id: '/signout'
-      path: '/signout'
-      fullPath: '/signout'
-      preLoaderRoute: typeof SignoutImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin/add': {
-      id: '/admin/add'
-      path: '/admin/add'
-      fullPath: '/admin/add'
-      preLoaderRoute: typeof AdminAddImport
-      parentRoute: typeof rootRoute
-    }
-    '/albums/$year': {
-      id: '/albums/$year'
-      path: '/albums/$year'
-      fullPath: '/albums/$year'
-      preLoaderRoute: typeof AlbumsYearImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin/': {
-      id: '/admin/'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/albums/': {
-      id: '/albums/'
-      path: '/albums'
-      fullPath: '/albums'
-      preLoaderRoute: typeof AlbumsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/artists/': {
-      id: '/artists/'
-      path: '/artists'
-      fullPath: '/artists'
-      preLoaderRoute: typeof ArtistsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/playlist/': {
-      id: '/playlist/'
-      path: '/playlist'
-      fullPath: '/playlist'
-      preLoaderRoute: typeof PlaylistIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/releases/': {
-      id: '/releases/'
-      path: '/releases'
-      fullPath: '/releases'
-      preLoaderRoute: typeof ReleasesIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/signin/': {
-      id: '/signin/'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/songs/': {
-      id: '/songs/'
-      path: '/songs'
-      fullPath: '/songs'
-      preLoaderRoute: typeof SongsIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/admin/edit/$albumId': {
-      id: '/admin/edit/$albumId'
-      path: '/admin/edit/$albumId'
-      fullPath: '/admin/edit/$albumId'
-      preLoaderRoute: typeof AdminEditAlbumIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/albums/all-time/edit': {
-      id: '/albums/all-time/edit'
-      path: '/albums/all-time/edit'
-      fullPath: '/albums/all-time/edit'
-      preLoaderRoute: typeof AlbumsAllTimeEditImport
-      parentRoute: typeof rootRoute
-    }
-    '/albums/all-time/': {
-      id: '/albums/all-time/'
-      path: '/albums/all-time'
-      fullPath: '/albums/all-time'
-      preLoaderRoute: typeof AlbumsAllTimeIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -250,7 +118,6 @@ export interface FileRoutesByFullPath {
   '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
   '/albums/all-time': typeof AlbumsAllTimeIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/not-found': typeof NotFoundRoute
@@ -268,9 +135,8 @@ export interface FileRoutesByTo {
   '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
   '/albums/all-time': typeof AlbumsAllTimeIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/not-found': typeof NotFoundRoute
   '/signout': typeof SignoutRoute
@@ -287,7 +153,6 @@ export interface FileRoutesById {
   '/albums/all-time/edit': typeof AlbumsAllTimeEditRoute
   '/albums/all-time/': typeof AlbumsAllTimeIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
@@ -342,7 +207,6 @@ export interface FileRouteTypes {
     | '/albums/all-time/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   NotFoundRoute: typeof NotFoundRoute
@@ -359,6 +223,116 @@ export interface RootRouteChildren {
   AdminEditAlbumIdRoute: typeof AdminEditAlbumIdRoute
   AlbumsAllTimeEditRoute: typeof AlbumsAllTimeEditRoute
   AlbumsAllTimeIndexRoute: typeof AlbumsAllTimeIndexRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/signout': {
+      id: '/signout'
+      path: '/signout'
+      fullPath: '/signout'
+      preLoaderRoute: typeof SignoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/not-found': {
+      id: '/not-found'
+      path: '/not-found'
+      fullPath: '/not-found'
+      preLoaderRoute: typeof NotFoundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/songs/': {
+      id: '/songs/'
+      path: '/songs'
+      fullPath: '/songs'
+      preLoaderRoute: typeof SongsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signin/': {
+      id: '/signin/'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/releases/': {
+      id: '/releases/'
+      path: '/releases'
+      fullPath: '/releases'
+      preLoaderRoute: typeof ReleasesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/playlist/': {
+      id: '/playlist/'
+      path: '/playlist'
+      fullPath: '/playlist'
+      preLoaderRoute: typeof PlaylistIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/artists/': {
+      id: '/artists/'
+      path: '/artists'
+      fullPath: '/artists'
+      preLoaderRoute: typeof ArtistsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/albums/': {
+      id: '/albums/'
+      path: '/albums'
+      fullPath: '/albums'
+      preLoaderRoute: typeof AlbumsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/albums/$year': {
+      id: '/albums/$year'
+      path: '/albums/$year'
+      fullPath: '/albums/$year'
+      preLoaderRoute: typeof AlbumsYearRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/add': {
+      id: '/admin/add'
+      path: '/admin/add'
+      fullPath: '/admin/add'
+      preLoaderRoute: typeof AdminAddRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/albums/all-time/': {
+      id: '/albums/all-time/'
+      path: '/albums/all-time'
+      fullPath: '/albums/all-time'
+      preLoaderRoute: typeof AlbumsAllTimeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/albums/all-time/edit': {
+      id: '/albums/all-time/edit'
+      path: '/albums/all-time/edit'
+      fullPath: '/albums/all-time/edit'
+      preLoaderRoute: typeof AlbumsAllTimeEditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/edit/$albumId': {
+      id: '/admin/edit/$albumId'
+      path: '/admin/edit/$albumId'
+      fullPath: '/admin/edit/$albumId'
+      preLoaderRoute: typeof AdminEditAlbumIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -378,79 +352,6 @@ const rootRouteChildren: RootRouteChildren = {
   AlbumsAllTimeEditRoute: AlbumsAllTimeEditRoute,
   AlbumsAllTimeIndexRoute: AlbumsAllTimeIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/not-found",
-        "/signout",
-        "/admin/add",
-        "/albums/$year",
-        "/admin/",
-        "/albums/",
-        "/artists/",
-        "/playlist/",
-        "/releases/",
-        "/signin/",
-        "/songs/",
-        "/admin/edit/$albumId",
-        "/albums/all-time/edit",
-        "/albums/all-time/"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/not-found": {
-      "filePath": "not-found.tsx"
-    },
-    "/signout": {
-      "filePath": "signout.tsx"
-    },
-    "/admin/add": {
-      "filePath": "admin/add.tsx"
-    },
-    "/albums/$year": {
-      "filePath": "albums/$year.tsx"
-    },
-    "/admin/": {
-      "filePath": "admin/index.tsx"
-    },
-    "/albums/": {
-      "filePath": "albums/index.tsx"
-    },
-    "/artists/": {
-      "filePath": "artists/index.tsx"
-    },
-    "/playlist/": {
-      "filePath": "playlist/index.tsx"
-    },
-    "/releases/": {
-      "filePath": "releases/index.tsx"
-    },
-    "/signin/": {
-      "filePath": "signin/index.tsx"
-    },
-    "/songs/": {
-      "filePath": "songs/index.tsx"
-    },
-    "/admin/edit/$albumId": {
-      "filePath": "admin/edit/$albumId.tsx"
-    },
-    "/albums/all-time/edit": {
-      "filePath": "albums/all-time/edit.tsx"
-    },
-    "/albums/all-time/": {
-      "filePath": "albums/all-time/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
