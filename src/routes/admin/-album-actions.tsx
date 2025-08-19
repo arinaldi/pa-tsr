@@ -7,7 +7,9 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuLabel,
+  DropdownMenuPositioner,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
@@ -49,26 +51,32 @@ export default function AlbumActions({ album }: Props) {
 
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger asChild>
-        <Button className="-mt-1.5 -mr-1 size-8 shrink-0 p-0" variant="ghost">
-          <span className="sr-only">Open menu</span>
-          <EllipsisVertical className="size-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {Object.entries(AlbumKeys).map(([key, value]) => (
-          <DropdownMenuCheckboxItem
-            checked={album[key as Key]}
-            key={key}
-            onCheckedChange={(checked) => onChange(key as Key, checked)}
-            onSelect={(event) => event.preventDefault()}
-          >
-            {value}
-          </DropdownMenuCheckboxItem>
-        ))}
-      </DropdownMenuContent>
+      <DropdownMenuTrigger
+        render={
+          <Button className="-mt-1.5 -mr-1 size-8 shrink-0 p-0" variant="ghost">
+            <span className="sr-only">Open menu</span>
+            <EllipsisVertical className="size-4" />
+          </Button>
+        }
+      />
+      <DropdownMenuPositioner align="end">
+        <DropdownMenuContent>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {Object.entries(AlbumKeys).map(([key, value]) => (
+              <DropdownMenuCheckboxItem
+                checked={album[key as Key]}
+                key={key}
+                onCheckedChange={(checked) => onChange(key as Key, checked)}
+                onSelect={(event) => event.preventDefault()}
+              >
+                {value}
+              </DropdownMenuCheckboxItem>
+            ))}
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenuPositioner>
     </DropdownMenu>
   );
 }

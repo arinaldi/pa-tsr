@@ -117,11 +117,13 @@ export default function DeleteAlbumModal({ album, className = '' }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className={className} variant="destructive">
-          Delete
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger
+        render={
+          <Button className={className} variant="destructive">
+            Delete
+          </Button>
+        }
+      />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>

@@ -1,6 +1,6 @@
-import { type FormEvent, useTransition } from 'react';
 import { useRouter } from '@tanstack/react-router';
-import { type UseFormHandleSubmit } from 'react-hook-form';
+import { type FormEvent, useTransition } from 'react';
+import type { UseFormHandleSubmit } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { MESSAGES } from '@/lib/constants';
@@ -30,9 +30,9 @@ export function useSubmit(options: Options): Payload {
         await submitFn(data);
         router.invalidate();
 
-        callbacks?.forEach((c) => {
+        for (const c of callbacks || []) {
           c();
-        });
+        }
 
         if (successMessage) {
           toast.success(successMessage);

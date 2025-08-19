@@ -1,6 +1,6 @@
+import { useRender } from '@base-ui-components/react/use-render';
 import { Link } from '@tanstack/react-router';
 import { ChevronRight, MoreHorizontal } from 'lucide-react';
-import { Slot as SlotPrimitive } from 'radix-ui';
 import type * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -33,22 +33,20 @@ function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
 }
 
 function BreadcrumbLink({
-  asChild,
   className,
+  render,
   ...props
 }: React.ComponentProps<typeof Link> & {
-  asChild?: boolean;
-  children: React.ReactNode;
+  render?: useRender.RenderProp;
 }) {
-  const Comp = asChild ? SlotPrimitive.Slot : Link;
-
-  return (
-    <Comp
-      data-slot="breadcrumb-link"
-      className={cn('transition-colors hover:text-foreground', className)}
-      {...props}
-    />
-  );
+  return useRender({
+    render: <Link {...props} />,
+    props: {
+      'data-slot': 'breadcrumb-link',
+      className: cn('transition-colors hover:text-foreground', className),
+      ...props,
+    },
+  });
 }
 
 function BreadcrumbPage({ className, ...props }: React.ComponentProps<'span'>) {
@@ -103,10 +101,10 @@ function BreadcrumbEllipsis({
 
 export {
   Breadcrumb,
-  BreadcrumbList,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
+  BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  BreadcrumbEllipsis,
 };

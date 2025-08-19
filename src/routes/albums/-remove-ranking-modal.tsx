@@ -47,11 +47,13 @@ export default function RemoveAllTimeRankingModal({ item, removeItem }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="size-6" size="icon" type="button" variant="ghost">
-          <X className="size-4" />
-        </Button>
-      </DialogTrigger>
+      <DialogTrigger
+        render={
+          <Button className="size-6" size="icon" type="button" variant="ghost">
+            <X className="size-4" />
+          </Button>
+        }
+      />
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>

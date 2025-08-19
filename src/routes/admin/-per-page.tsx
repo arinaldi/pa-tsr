@@ -5,6 +5,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectPositioner,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -21,7 +22,9 @@ export default function PerPage() {
     perPage.toString(),
   );
 
-  function onValueChange(value: string) {
+  function onValueChange(value: unknown, _?: Event | undefined) {
+    if (typeof value !== 'string') return;
+
     startTransition(() => {
       setOptimisticValue(value);
       navigate({
@@ -41,11 +44,13 @@ export default function PerPage() {
         <SelectTrigger className="h-8">
           <SelectValue />
         </SelectTrigger>
-        <SelectContent side="top">
-          <SelectItem value={SMALL.toString()}>{SMALL}</SelectItem>
-          <SelectItem value={MEDIUM.toString()}>{MEDIUM}</SelectItem>
-          <SelectItem value={LARGE.toString()}>{LARGE}</SelectItem>
-        </SelectContent>
+        <SelectPositioner side="top">
+          <SelectContent>
+            <SelectItem value={SMALL.toString()}>{SMALL}</SelectItem>
+            <SelectItem value={MEDIUM.toString()}>{MEDIUM}</SelectItem>
+            <SelectItem value={LARGE.toString()}>{LARGE}</SelectItem>
+          </SelectContent>
+        </SelectPositioner>
       </Select>
     </div>
   );

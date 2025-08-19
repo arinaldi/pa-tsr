@@ -10,13 +10,17 @@ interface Props {
 
 export default function TableLink({ id }: Props) {
   return (
-    <Button asChild className="size-8 p-0" variant="ghost">
-      <Link
-        search={(prev) => prev}
-        to={`${ROUTES_ADMIN.edit.href.replace(':id', id.toString())}`}
-      >
-        <ChevronRight className="size-4" />
-      </Link>
-    </Button>
+    <Button
+      className="size-8 p-0"
+      render={
+        <Link
+          search={(prev) => prev}
+          to={`${ROUTES_ADMIN.edit.href.replace(':id', id.toString())}`}
+        >
+          <ChevronRight className="size-4" />
+        </Link>
+      }
+      variant="ghost"
+    />
   );
 }

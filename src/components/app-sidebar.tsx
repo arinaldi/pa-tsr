@@ -1,15 +1,16 @@
 import { Outlet } from '@tanstack/react-router';
 import { Disc, Lock } from 'lucide-react';
 
+import MenuLink from '@/components/menu-link';
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
 } from '@/components/ui/breadcrumb';
-import MenuLink from '@/components/menu-link';
 import { Separator } from '@/components/ui/separator';
 import {
+  SIDEBAR_COOKIE_NAME,
   Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -24,12 +25,11 @@ import {
   SidebarProvider,
   SidebarRail,
   SidebarTrigger,
-  SIDEBAR_COOKIE_NAME,
 } from '@/components/ui/sidebar';
 import { APP_NAME, ROUTES, ROUTES_ADMIN } from '@/lib/constants';
 import { getCookie } from '@/lib/utils';
-import { useSession } from './session-provider';
 import PageTitle from './page-title';
+import { useSession } from './session-provider';
 import UserMenu from './user-menu';
 
 export default function AppSidebar() {
@@ -48,22 +48,22 @@ export default function AppSidebar() {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton
-                asChild
                 className="hover:bg-transparent"
+                render={
+                  <div>
+                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                      <Disc className="size-4" />
+                    </div>
+                    <div className="grid flex-1 text-left text-sm leading-tight">
+                      <span className="truncate font-semibold">{APP_NAME}</span>
+                      <span className="truncate text-muted-foreground text-xs">
+                        The best music on the net
+                      </span>
+                    </div>
+                  </div>
+                }
                 size="lg"
-              >
-                <div>
-                  <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                    <Disc className="size-4" />
-                  </div>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">{APP_NAME}</span>
-                    <span className="text-muted-foreground truncate text-xs">
-                      The best music on the net
-                    </span>
-                  </div>
-                </div>
-              </SidebarMenuButton>
+              />
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarHeader>

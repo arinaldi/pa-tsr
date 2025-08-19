@@ -57,9 +57,7 @@ export default function AddReleaseModal() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>Add release</Button>
-      </DialogTrigger>
+      <DialogTrigger render={<Button>Add release</Button>} />
       <DialogContent>
         <DialogHeader className="text-left">
           <DialogTitle>Add release</DialogTitle>

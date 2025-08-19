@@ -54,9 +54,7 @@ export default function AddSongModal() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>Add song</Button>
-      </DialogTrigger>
+      <DialogTrigger render={<Button>Add song</Button>} />
       <DialogContent>
         <DialogHeader className="text-left">
           <DialogTitle>Add song</DialogTitle>

@@ -14,6 +14,7 @@ import {
 import {
   Popover,
   PopoverContent,
+  PopoverPositioner,
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
@@ -60,70 +61,74 @@ export default function FacetedFilter({ queryKey, title }: Props) {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          className="justify-start border-dashed text-xs"
-          size="sm"
-          variant="outline"
-        >
-          <PlusCircle />
-          {title}
-          {selectedOption && (
-            <>
-              <Separator
-                orientation="vertical"
-                className="mx-1 data-[orientation=vertical]:h-4"
-              />
-              <div className="flex space-x-1">
-                <Badge
-                  className="rounded-sm px-1 font-normal"
-                  variant="secondary"
-                >
-                  {selectedOption.label}
-                </Badge>
-              </div>
-            </>
-          )}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent align="start" className="w-[200px] p-0">
-        <Command>
-          <CommandList>
-            <CommandGroup>
-              {options.map((option) => {
-                return (
-                  <CommandItem
-                    key={option.value}
-                    onSelect={onSelect}
-                    value={option.value}
+      <PopoverTrigger
+        render={
+          <Button
+            className="justify-start border-dashed text-xs"
+            size="sm"
+            variant="outline"
+          >
+            <PlusCircle />
+            {title}
+            {selectedOption && (
+              <>
+                <Separator
+                  orientation="vertical"
+                  className="mx-1 data-[orientation=vertical]:h-4"
+                />
+                <div className="flex space-x-1">
+                  <Badge
+                    className="rounded-sm px-1 font-normal"
+                    variant="secondary"
                   >
-                    <option.icon className="size-4 text-muted-foreground" />
-                    <span
-                      className={cn(
-                        option.value === optimisticValue.toString() &&
-                          'font-semibold',
-                      )}
+                    {selectedOption.label}
+                  </Badge>
+                </div>
+              </>
+            )}
+          </Button>
+        }
+      />
+      <PopoverPositioner align="start">
+        <PopoverContent className="w-[200px] p-0">
+          <Command>
+            <CommandList>
+              <CommandGroup>
+                {options.map((option) => {
+                  return (
+                    <CommandItem
+                      key={option.value}
+                      onSelect={onSelect}
+                      value={option.value}
                     >
-                      {option.label}
-                    </span>
-                  </CommandItem>
-                );
-              })}
-            </CommandGroup>
-            <CommandSeparator />
-            <CommandGroup>
-              <CommandItem
-                className="justify-center"
-                disabled={typeof optimisticValue !== 'boolean'}
-                onSelect={onSelect}
-                value="clear"
-              >
-                Clear filter
-              </CommandItem>
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
+                      <option.icon className="size-4 text-muted-foreground" />
+                      <span
+                        className={cn(
+                          option.value === optimisticValue.toString() &&
+                            'font-semibold',
+                        )}
+                      >
+                        {option.label}
+                      </span>
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+              <CommandSeparator />
+              <CommandGroup>
+                <CommandItem
+                  className="justify-center"
+                  disabled={typeof optimisticValue !== 'boolean'}
+                  onSelect={onSelect}
+                  value="clear"
+                >
+                  Clear filter
+                </CommandItem>
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </PopoverPositioner>
     </Popover>
   );
 }

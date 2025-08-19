@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuPositioner,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useMobile } from '@/hooks/use-mobile';
@@ -52,16 +53,18 @@ export default function PageTitle() {
             >
               <BreadcrumbEllipsis className="size-4" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              {data.parents.map((p) => (
-                <DropdownMenuItem
-                  key={p.href}
-                  onSelect={() => navigate({ to: p.href })}
-                >
-                  {p.title}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
+            <DropdownMenuPositioner align="start">
+              <DropdownMenuContent>
+                {data.parents.map((p) => (
+                  <DropdownMenuItem
+                    key={p.href}
+                    onSelect={() => navigate({ to: p.href })}
+                  >
+                    {p.title}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenuPositioner>
           </DropdownMenu>
           <BreadcrumbSeparator />
         </>
