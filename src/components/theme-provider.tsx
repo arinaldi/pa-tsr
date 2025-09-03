@@ -1,6 +1,6 @@
 import { createContext, use, useEffect, useState } from 'react';
 
-import { type Children } from '@/lib/types';
+import type { Children } from '@/lib/types';
 
 export type Theme = 'dark' | 'light' | 'system';
 

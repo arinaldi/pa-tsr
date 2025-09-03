@@ -23,7 +23,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { ROUTES_ADMIN, ROUTE_HREF } from '@/lib/constants';
+import { ROUTE_HREF, ROUTES_ADMIN } from '@/lib/constants';
 import { supabase } from '@/supabase/client';
 
 export default function UserMenu() {
@@ -77,11 +77,9 @@ export default function UserMenu() {
                     </div>
                   </>
                 ) : (
-                  <>
-                    <Avatar className="flex size-8 items-center justify-center rounded-lg bg-muted">
-                      <User className="size-5" />
-                    </Avatar>
-                  </>
+                  <Avatar className="flex size-8 items-center justify-center rounded-lg bg-muted">
+                    <User className="size-5" />
+                  </Avatar>
                 )}
                 <ChevronsUpDown className="ml-auto size-4" />
               </SidebarMenuButton>

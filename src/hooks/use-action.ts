@@ -1,12 +1,12 @@
-import { useActionState } from 'react';
 import { useRouter } from '@tanstack/react-router';
+import { useActionState } from 'react';
 import { toast } from 'sonner';
 
 import { MESSAGES } from '@/lib/constants';
 import type { Callback } from '@/lib/types';
 import { capitalizeFirstLetter } from '@/lib/utils';
 
-type State = void | undefined;
+type State = undefined;
 
 interface Options {
   callbacks?: Callback[];

@@ -1,4 +1,4 @@
-import { Link, createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { Pencil } from 'lucide-react';
 
 import { useSession } from '@/components/session-provider';
@@ -27,6 +27,7 @@ function TopAlbums() {
   const session = useSession();
 
   return (
+    // biome-ignore lint: /correctness/useUniqueElementIds
     <div className="space-y-4" id="top">
       <DecadeLink />
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 md:gap-8 lg:grid-cols-3 2xl:grid-cols-4">
