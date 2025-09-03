@@ -4,8 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { useSubmit } from '@/hooks/use-submit';
 import { MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
-import { validateSession } from '@/supabase/client';
-import { supabase } from '@/supabase/client';
+import { supabase, validateSession } from '@/supabase/client';
 import { getAlbum } from '@/supabase/data';
 import AlbumForm from '../-album-form';
 import DeleteAlbumModal from '../-delete-album-modal';

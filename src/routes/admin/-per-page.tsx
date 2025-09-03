@@ -1,3 +1,4 @@
+import type { Select as SelectPrimitive } from '@base-ui-components/react/select';
 import { useNavigate } from '@tanstack/react-router';
 import { startTransition, useOptimistic } from 'react';
 
@@ -22,7 +23,10 @@ export default function PerPage() {
     perPage.toString(),
   );
 
-  function onValueChange(value: unknown, _?: Event | undefined) {
+  function onValueChange(
+    value: unknown,
+    _eventDetails: SelectPrimitive.Root.ChangeEventDetails,
+  ) {
     if (typeof value !== 'string') return;
 
     startTransition(() => {

@@ -6,7 +6,8 @@ import type {
 
 import type { Database } from '@/supabase/db-types';
 
-export type Album = Database['public']['Tables']['albums']['Row'];
+type AlbumType = Database['public']['Tables']['albums']['Row'];
+export type Album = Omit<AlbumType, 'artist_title'>;
 export type Ranking = Database['public']['Tables']['rankings']['Row'];
 export type Release = Database['public']['Tables']['releases']['Row'];
 export type Song = Database['public']['Tables']['songs']['Row'];
