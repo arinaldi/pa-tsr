@@ -24,6 +24,22 @@ export async function getAlbum(id: string) {
   return { album };
 }
 
+export async function getAllAlbums() {
+  const {
+    count,
+    data: albums,
+    error,
+  } = await supabase
+    .from('albums')
+    .select('*', { count: 'exact' })
+    .order('artist', { ascending: true })
+    .order('title', { ascending: true });
+
+  if (error) throw new Error(error.message);
+
+  return { albums, count: count ?? 0 };
+}
+
 async function getAlbums(searchParams: AdminSearch) {
   const { cd, favorite, sort, studio, wishlist } = searchParams;
   const page = searchParams.page ?? 1;

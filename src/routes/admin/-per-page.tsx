@@ -1,6 +1,4 @@
-import type { Select as SelectPrimitive } from '@base-ui-components/react/select';
-import { useNavigate } from '@tanstack/react-router';
-import { startTransition, useOptimistic } from 'react';
+import type { Table } from '@tanstack/react-table';
 
 import {
   Select,
@@ -11,40 +9,21 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { PER_PAGE } from '@/lib/constants';
-import { Route } from '.';
 
 const { SMALL, MEDIUM, LARGE } = PER_PAGE;
 
-export default function PerPage() {
-  const navigate = useNavigate({ from: Route.fullPath });
-  const perPage =
-    Route.useSearch({ select: (search) => search.perPage }) ?? PER_PAGE.SMALL;
-  const [optimisticValue, setOptimisticValue] = useOptimistic(
-    perPage.toString(),
-  );
+interface Props<TData> {
+  table: Table<TData>;
+}
 
-  function onValueChange(
-    value: unknown,
-    _eventDetails: SelectPrimitive.Root.ChangeEventDetails,
-  ) {
-    if (typeof value !== 'string') return;
-
-    startTransition(() => {
-      setOptimisticValue(value);
-      navigate({
-        search: (prev) => ({
-          ...prev,
-          page: 1,
-          perPage: Number.parseInt(value, 10),
-        }),
-      });
-    });
-  }
-
+export default function PerPage<TData>({ table }: Props<TData>) {
   return (
     <div className="flex items-center gap-x-2">
       <p className="font-medium text-sm">Rows per page</p>
-      <Select onValueChange={onValueChange} value={optimisticValue}>
+      <Select
+        onValueChange={(value) => table.setPageSize(Number(value))}
+        value={`${table.getState().pagination.pageSize}`}
+      >
         <SelectTrigger className="h-8">
           <SelectValue />
         </SelectTrigger>

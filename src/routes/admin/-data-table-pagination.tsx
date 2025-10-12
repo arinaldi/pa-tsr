@@ -1,11 +1,10 @@
-import { useNavigate } from '@tanstack/react-router';
+import type { Table } from '@tanstack/react-table';
 import {
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
 } from 'lucide-react';
-import { startTransition, useOptimistic } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,54 +12,28 @@ import {
   PaginationContent,
   PaginationItem,
 } from '@/components/ui/pagination';
-import { PER_PAGE } from '@/lib/constants';
-import { Route } from '.';
 import PerPage from './-per-page';
 
-interface Props {
-  total: number;
+interface Props<TData> {
+  table: Table<TData>;
 }
 
-export default function Paginate({ total }: Props) {
-  const navigate = useNavigate({ from: Route.fullPath });
-  const { page, perPage } = Route.useSearch({
-    select: (search) => ({
-      page: search.page ?? 1,
-      perPage: search.perPage ?? PER_PAGE.SMALL,
-    }),
-  });
-  const [optimisticPage, setOptimisticPage] = useOptimistic(page);
-  const lastPage = Math.ceil(total / perPage);
-  const isFirstPage = optimisticPage === 1;
-  const isLastPage = optimisticPage === lastPage;
-
-  function goToPage(value: number) {
-    startTransition(() => {
-      setOptimisticPage(value);
-      navigate({
-        search: (prev) => ({
-          ...prev,
-          page: value,
-        }),
-      });
-    });
-  }
-
+export function DataTablePagination<TData>({ table }: Props<TData>) {
   return (
     <>
       {/* Desktop version */}
       <Pagination className="mt-4 hidden sm:flex sm:items-center sm:justify-end">
         <div className="flex items-center gap-10">
-          <PerPage />
+          <PerPage table={table} />
           <p className="font-medium text-sm">
-            Page {optimisticPage.toLocaleString()} of{' '}
-            {lastPage.toLocaleString()}
+            Page {(table.getState().pagination.pageIndex + 1).toLocaleString()}{' '}
+            of {table.getPageCount().toLocaleString()}
           </p>
           <PaginationContent className="gap-2">
             <PaginationItem>
               <Button
-                disabled={isFirstPage}
-                onClick={() => goToPage(1)}
+                disabled={!table.getCanPreviousPage()}
+                onClick={() => table.setPageIndex(0)}
                 size="icon"
                 variant="outline"
               >
@@ -70,8 +43,8 @@ export default function Paginate({ total }: Props) {
             </PaginationItem>
             <PaginationItem>
               <Button
-                disabled={isFirstPage}
-                onClick={() => goToPage(optimisticPage - 1)}
+                disabled={!table.getCanPreviousPage()}
+                onClick={() => table.previousPage()}
                 size="icon"
                 variant="outline"
               >
@@ -81,8 +54,8 @@ export default function Paginate({ total }: Props) {
             </PaginationItem>
             <PaginationItem>
               <Button
-                disabled={isLastPage}
-                onClick={() => goToPage(optimisticPage + 1)}
+                disabled={!table.getCanNextPage()}
+                onClick={() => table.nextPage()}
                 size="icon"
                 variant="outline"
               >
@@ -92,8 +65,8 @@ export default function Paginate({ total }: Props) {
             </PaginationItem>
             <PaginationItem>
               <Button
-                disabled={isLastPage}
-                onClick={() => goToPage(lastPage)}
+                disabled={!table.getCanNextPage()}
+                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 size="icon"
                 variant="outline"
               >
@@ -110,8 +83,8 @@ export default function Paginate({ total }: Props) {
           <PaginationContent className="gap-2">
             <PaginationItem>
               <Button
-                disabled={isFirstPage}
-                onClick={() => goToPage(optimisticPage - 1)}
+                disabled={!table.getCanPreviousPage()}
+                onClick={() => table.previousPage()}
                 size="icon"
                 variant="outline"
               >
@@ -121,8 +94,8 @@ export default function Paginate({ total }: Props) {
             </PaginationItem>
             <PaginationItem>
               <Button
-                disabled={isLastPage}
-                onClick={() => goToPage(optimisticPage + 1)}
+                disabled={!table.getCanNextPage()}
+                onClick={() => table.nextPage()}
                 size="icon"
                 variant="outline"
               >
@@ -132,8 +105,8 @@ export default function Paginate({ total }: Props) {
             </PaginationItem>
           </PaginationContent>
           <p className="font-medium text-sm">
-            Page {optimisticPage.toLocaleString()} of{' '}
-            {lastPage.toLocaleString()}
+            Page {(table.getState().pagination.pageIndex + 1).toLocaleString()}{' '}
+            of {table.getPageCount().toLocaleString()}
           </p>
         </div>
       </Pagination>
