@@ -27,10 +27,10 @@ export function DataTableToolbar<TData>({ table }: Props<TData>) {
           autoFocus
           className="h-8 w-[150px] lg:w-[250px]"
           onChange={(event) =>
-            table.getColumn('artist')?.setFilterValue(event.target.value)
+            table.setGlobalFilter(String(event.target.value))
           }
           placeholder="Search"
-          value={(table.getColumn('artist')?.getFilterValue() as string) ?? ''}
+          value={table.getState().globalFilter}
         />
         {table.getColumn('artist') && (
           <DataTableFacetedFilter

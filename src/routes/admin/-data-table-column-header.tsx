@@ -36,7 +36,7 @@ export default function DataTableColumnHeader<TData, TValue>({
               size="sm"
               variant="ghost"
             >
-              <span>{title}</span>
+              <span className="text-xs">{title}</span>
               {column.getIsSorted() === 'desc' ? (
                 <ArrowDown />
               ) : column.getIsSorted() === 'asc' ? (
