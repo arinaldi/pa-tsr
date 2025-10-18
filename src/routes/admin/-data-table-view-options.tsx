@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 interface Props<TData> {
   table: Table<TData>;
@@ -22,11 +23,7 @@ export function DataTableViewOptions<TData>({ table }: Props<TData>) {
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button
-            className="ml-auto flex h-8 text-xs"
-            size="sm"
-            variant="outline"
-          >
+          <Button className="flex h-8 text-xs" size="sm" variant="outline">
             <Settings2 />
             View
           </Button>
@@ -48,7 +45,9 @@ export function DataTableViewOptions<TData>({ table }: Props<TData>) {
               return (
                 <DropdownMenuCheckboxItem
                   key={column.id}
-                  className="capitalize"
+                  className={cn(
+                    column.id === 'cd' ? 'uppercase' : 'capitalize',
+                  )}
                   checked={column.getIsVisible()}
                   onCheckedChange={(value) => column.toggleVisibility(!!value)}
                 >

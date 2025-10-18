@@ -1,8 +1,11 @@
 import type { Table } from '@tanstack/react-table';
 import { X } from 'lucide-react';
+import { useRef } from 'react';
 
+import InputClearButton from '@/components/input-clear-button';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { options } from './-data';
 import { DataTableFacetedFilter } from './-data-table-faceted-filter';
 import { DataTableViewOptions } from './-data-table-view-options';
 
@@ -10,33 +13,62 @@ interface Props<TData> {
   table: Table<TData>;
 }
 
-const options = [
-  { label: 'CD', value: 'cd' },
-  { label: 'Favorite', value: 'favorite' },
-  { label: 'Studio', value: 'studio' },
-  { label: 'Wishlist', value: 'wishlist' },
-];
-
 export function DataTableToolbar<TData>({ table }: Props<TData>) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const filtered = table.getState().columnFilters.length > 0;
+  const value = table.getState().globalFilter ?? '';
+
+  function onClear() {
+    table.setGlobalFilter('');
+
+    if (inputRef?.current) {
+      inputRef.current.value = '';
+      inputRef.current.focus();
+    }
+  }
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center space-x-2">
+    <div className="flex flex-col gap-2 md:flex-row md:items-center">
+      <div className="relative">
         <Input
           autoFocus
-          className="h-8 w-[150px] lg:w-[250px]"
+          name="search"
           onChange={(event) =>
             table.setGlobalFilter(String(event.target.value))
           }
           placeholder="Search"
-          value={table.getState().globalFilter}
+          ref={inputRef}
+          value={value}
         />
-        {table.getColumn('artist') && (
+        {value && <InputClearButton onClick={onClear} />}
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        {table.getColumn('cd') && (
           <DataTableFacetedFilter
-            column={table.getColumn('artist')}
-            title="Status"
+            column={table.getColumn('cd')}
             options={options}
+            title="CD"
+          />
+        )}
+        {table.getColumn('favorite') && (
+          <DataTableFacetedFilter
+            column={table.getColumn('favorite')}
+            options={options}
+            title="Favorite"
+          />
+        )}
+        {table.getColumn('studio') && (
+          <DataTableFacetedFilter
+            column={table.getColumn('studio')}
+            options={options}
+            title="Studio"
+          />
+        )}
+        {table.getColumn('wishlist') && (
+          <DataTableFacetedFilter
+            column={table.getColumn('wishlist')}
+            options={options}
+            title="Wishlist"
           />
         )}
         {filtered && (
@@ -50,7 +82,9 @@ export function DataTableToolbar<TData>({ table }: Props<TData>) {
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
+      <div className="md:ml-auto">
+        <DataTableViewOptions table={table} />
+      </div>
     </div>
   );
 }

@@ -117,7 +117,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                             : 'opacity-50 [&_svg]:invisible',
                         )}
                       >
-                        <Check />
+                        <Check className="size-4 text-current" />
                       </div>
                       <span>{option.label}</span>
                       {facets?.get(option.value) && (

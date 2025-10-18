@@ -1,8 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table';
-import { Check, Disc, HeartPlus } from 'lucide-react';
+import { Check } from 'lucide-react';
 
 import type { Album } from '@/lib/types';
-import { cn } from '@/lib/utils';
 import DataTableColumnHeader from './-data-table-column-header';
 
 export const columns: ColumnDef<Album>[] = [
@@ -23,30 +22,78 @@ export const columns: ColumnDef<Album>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Title" />
     ),
+    cell: ({ row }) => row.getValue('title'),
+  },
+  {
+    accessorKey: 'cd',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="CD" />
+    ),
     cell: ({ row }) => {
-      const album = row.original;
+      const rowValue = row.getValue('cd') as boolean;
 
-      return (
-        <div>
-          {album.cd && (
-            <Disc className="mr-1 mb-0.5 inline size-4 text-muted-foreground" />
-          )}
-          {album.wishlist && (
-            <HeartPlus className="mr-1 mb-0.5 inline size-4 text-muted-foreground" />
-          )}
-          <span
-            className={cn(
-              album.studio ? 'font-medium' : 'font-light',
-              album.favorite && 'italic',
-            )}
-          >
-            {album.title}
-          </span>
-          {album.favorite && (
-            <Check className="mb-0.5 ml-1 inline size-4 text-muted-foreground" />
-          )}
-        </div>
-      );
+      if (!rowValue) return null;
+
+      return <Check className="size-4" />;
+    },
+    filterFn: (row, id, value) => {
+      const rowValue = row.getValue(id) as boolean;
+
+      return value.includes(rowValue.toString());
+    },
+  },
+  {
+    accessorKey: 'favorite',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Favorite" />
+    ),
+    cell: ({ row }) => {
+      const rowValue = row.getValue('favorite') as boolean;
+
+      if (!rowValue) return null;
+
+      return <Check className="size-4" />;
+    },
+    filterFn: (row, id, value) => {
+      const rowValue = row.getValue(id) as boolean;
+
+      return value.includes(rowValue.toString());
+    },
+  },
+  {
+    accessorKey: 'studio',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Studio" />
+    ),
+    cell: ({ row }) => {
+      const rowValue = row.getValue('studio') as boolean;
+
+      if (!rowValue) return null;
+
+      return <Check className="size-4" />;
+    },
+    filterFn: (row, id, value) => {
+      const rowValue = row.getValue(id) as boolean;
+
+      return value.includes(rowValue.toString());
+    },
+  },
+  {
+    accessorKey: 'wishlist',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Wishlist" />
+    ),
+    cell: ({ row }) => {
+      const rowValue = row.getValue('wishlist') as boolean;
+
+      if (!rowValue) return null;
+
+      return <Check className="size-4" />;
+    },
+    filterFn: (row, id, value) => {
+      const rowValue = row.getValue(id) as boolean;
+
+      return value.includes(rowValue.toString());
     },
   },
 ];
