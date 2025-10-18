@@ -1,4 +1,4 @@
-import { Outlet } from '@tanstack/react-router';
+import { Link, Outlet } from '@tanstack/react-router';
 import { Disc, Lock } from 'lucide-react';
 
 import MenuLink from '@/components/menu-link';
@@ -48,9 +48,8 @@ export default function AppSidebar() {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton
-                className="hover:bg-transparent"
                 render={
-                  <div>
+                  <Link to="/">
                     <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                       <Disc className="size-4" />
                     </div>
@@ -60,7 +59,7 @@ export default function AppSidebar() {
                         The best music on the net
                       </span>
                     </div>
-                  </div>
+                  </Link>
                 }
                 size="lg"
               />
