@@ -20,19 +20,6 @@ export enum PER_PAGE {
   LARGE = 100,
 }
 
-export enum SORT_DIRECTION {
-  ASC = 'asc',
-  DESC = 'desc',
-  NONE = '',
-}
-
-export enum SORT_VALUE {
-  ARTIST = 'artist',
-  NONE = '',
-  TITLE = 'title',
-  YEAR = 'year',
-}
-
 /* CONST */
 
 export const APP_NAME = 'Perfect Albums';

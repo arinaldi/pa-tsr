@@ -38,13 +38,7 @@ export default function DeleteAlbumModal({ album, className = '' }: Props) {
   const [open, setOpen] = useState(false);
   const mobile = useMobile();
   const [, action, pending] = useAction({
-    callbacks: [
-      () =>
-        navigate({
-          search: (prev) => prev,
-          to: ROUTES_ADMIN.base.href,
-        }),
-    ],
+    callbacks: [() => navigate({ to: ROUTES_ADMIN.base.href })],
     initialState: undefined,
     shouldInvalidate: false,
     submitFn: async () => {

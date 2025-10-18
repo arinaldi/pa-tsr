@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ROUTES_ADMIN } from '@/lib/constants';
 import { validateSession } from '@/supabase/client';
-import { getAllAlbums } from '@/supabase/data';
+import { getAdminData } from '@/supabase/data';
 import { columns } from './-columns';
 import DataEmptyPlaceholder from './-data-empty-placeholder';
 import DataTable from './-data-table';
@@ -13,15 +13,13 @@ export const Route = createFileRoute('/admin/')({
   beforeLoad: validateSession,
   component: Admin,
   loader: async () => {
-    const data = await getAllAlbums();
+    const data = await getAdminData();
 
     return {
       ...data,
-      cdCount: 0, // TODO: get from supabase/data
       title: 'Admin',
     };
   },
-  // validateSearch: adminSearchSchema,
 });
 
 export default function Admin() {
@@ -30,7 +28,7 @@ export default function Admin() {
   return (
     <>
       <div className="flex items-center justify-between gap-2">
-        <Link search={(prev) => prev} to={ROUTES_ADMIN.add.href}>
+        <Link to={ROUTES_ADMIN.add.href}>
           <Button type="button">Add album</Button>
         </Link>
         <div className="flex items-center gap-4 dark:text-white">

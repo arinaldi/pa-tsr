@@ -48,13 +48,7 @@ function EditAlbum() {
   });
 
   const { onSubmit, submitting } = useSubmit({
-    callbacks: [
-      () =>
-        navigate({
-          search: (prev) => prev,
-          to: ROUTES_ADMIN.base.href,
-        }),
-    ],
+    callbacks: [() => navigate({ to: ROUTES_ADMIN.base.href })],
     handleSubmit: form.handleSubmit,
     submitFn: async ({ year, ...rest }: AlbumInput) => {
       const id = Number.parseInt(albumId, 10);
