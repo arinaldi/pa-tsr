@@ -96,6 +96,7 @@ export default function DataTable<TData, TValue>({
                 return (
                   <TableRow
                     key={row.id}
+                    className="cursor-pointer"
                     data-state={row.getIsSelected() && 'selected'}
                     onClick={() =>
                       navigate({
