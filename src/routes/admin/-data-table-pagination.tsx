@@ -19,10 +19,13 @@ interface Props<TData> {
 }
 
 export function DataTablePagination<TData>({ table }: Props<TData>) {
+  const rowsCount = table.getFilteredRowModel().rows.length.toLocaleString();
+
   return (
     <>
       {/* Desktop version */}
-      <Pagination className="mt-4 hidden sm:flex sm:items-center sm:justify-end">
+      <Pagination className="mt-4 hidden px-2 sm:flex sm:items-center sm:justify-between">
+        <div className="text-muted-foreground text-sm">{rowsCount} rows</div>
         <div className="flex items-center gap-10">
           <PerPage table={table} />
           <p className="font-medium text-sm">
@@ -78,7 +81,8 @@ export function DataTablePagination<TData>({ table }: Props<TData>) {
         </div>
       </Pagination>
       {/* Mobile version */}
-      <Pagination className="mt-4 flex flex-col gap-4 sm:hidden">
+      <Pagination className="mt-4 flex justify-between gap-4 px-2 sm:hidden">
+        <div className="text-muted-foreground text-sm">{rowsCount} rows</div>
         <div className="flex items-center gap-4">
           <PaginationContent className="gap-2">
             <PaginationItem>
