@@ -22,7 +22,9 @@ export const columns: ColumnDef<Album>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Title" />
     ),
-    cell: ({ row }) => row.getValue('title'),
+    cell: ({ row }) => (
+      <span className="font-medium">{row.getValue('title')}</span>
+    ),
   },
   {
     accessorKey: 'cd',
