@@ -1,7 +1,8 @@
 import type { ColumnDef } from '@tanstack/react-table';
-import { Check } from 'lucide-react';
+import { Check, Disc } from 'lucide-react';
 
 import type { Album } from '@/lib/types';
+import { cn } from '@/lib/utils';
 import DataTableColumnHeader from './-data-table-column-header';
 
 export const columns: ColumnDef<Album>[] = [
@@ -22,9 +23,20 @@ export const columns: ColumnDef<Album>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Title" />
     ),
-    cell: ({ row }) => (
-      <span className="font-medium">{row.getValue('title')}</span>
-    ),
+    cell: ({ row }) => {
+      const album = row.original;
+
+      return (
+        <>
+          {album.cd && (
+            <Disc className="mr-1 mb-0.5 inline size-4 text-muted-foreground" />
+          )}
+          <span className={cn(album.studio ? 'font-medium' : 'font-light')}>
+            {album.title}
+          </span>
+        </>
+      );
+    },
   },
   {
     accessorKey: 'cd',

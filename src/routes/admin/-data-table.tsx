@@ -40,7 +40,10 @@ export default function DataTable<TData, TValue>({
   const navigate = useNavigate();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    cd: false,
+    studio: false,
+  });
   const table = useReactTable({
     data,
     columns,

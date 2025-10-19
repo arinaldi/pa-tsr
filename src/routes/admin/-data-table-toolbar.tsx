@@ -18,6 +18,21 @@ export function DataTableToolbar<TData>({ table }: Props<TData>) {
   const filtered = table.getState().columnFilters.length > 0;
   const value = table.getState().globalFilter ?? '';
 
+  function onSearch(event: React.ChangeEvent<HTMLInputElement>) {
+    const { sorting } = table.getState();
+    const [sortedCol] = sorting;
+    const shouldSort =
+      !sortedCol ||
+      sortedCol?.id !== 'year' ||
+      (sortedCol?.id === 'year' && sortedCol?.desc);
+
+    if (shouldSort) {
+      table.setSorting([{ id: 'year', desc: false }]);
+    }
+
+    table.setGlobalFilter(String(event.target.value));
+  }
+
   function onClear() {
     table.setGlobalFilter('');
 
@@ -33,9 +48,7 @@ export function DataTableToolbar<TData>({ table }: Props<TData>) {
         <Input
           autoFocus
           name="search"
-          onChange={(event) =>
-            table.setGlobalFilter(String(event.target.value))
-          }
+          onChange={onSearch}
           placeholder="Search"
           ref={inputRef}
           value={value}
