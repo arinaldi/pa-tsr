@@ -1,6 +1,5 @@
 import { useRouter } from '@tanstack/react-router';
-import { type FormEvent, useTransition } from 'react';
-import type { UseFormHandleSubmit } from 'react-hook-form';
+import { useTransition } from 'react';
 import { toast } from 'sonner';
 
 import { MESSAGES } from '@/lib/constants';
@@ -9,20 +8,19 @@ import { capitalizeFirstLetter } from '@/lib/utils';
 
 export interface Options {
   callbacks?: Callback[];
-  handleSubmit?: UseFormHandleSubmit<any>;
   submitFn: (data?: any) => Promise<void>;
   successMessage?: string;
 }
 
 interface Payload {
   submitting: boolean;
-  onSubmit: (event: FormEvent) => Promise<void>;
+  onSubmit: (data?: any) => Promise<void>;
 }
 
 export function useSubmit(options: Options): Payload {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
-  const { callbacks, handleSubmit, submitFn, successMessage = '' } = options;
+  const { callbacks, submitFn, successMessage = '' } = options;
 
   async function handler(data?: any) {
     startTransition(async () => {
@@ -50,7 +48,7 @@ export function useSubmit(options: Options): Payload {
   }
 
   return {
-    onSubmit: handleSubmit ? handleSubmit(handler) : handler,
+    onSubmit: handler,
     submitting: pending,
   };
 }

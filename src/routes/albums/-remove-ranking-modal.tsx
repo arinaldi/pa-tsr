@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useSubmit } from '@/hooks/use-submit';
+import { useSubmit } from '@/hooks/submit';
 import type { AllTimeListItem } from '@/lib/formatters';
 import { supabase } from '@/supabase/client';
 

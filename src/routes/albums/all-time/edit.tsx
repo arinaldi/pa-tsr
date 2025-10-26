@@ -4,7 +4,7 @@ import { type FormEvent, useState } from 'react';
 
 import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
-import { useSubmit } from '@/hooks/use-submit';
+import { useSubmit } from '@/hooks/submit';
 import { ROUTE_HREF } from '@/lib/constants';
 import DataEmptyPlaceholder from '@/routes/admin/-data-empty-placeholder';
 import { adminSearchSchema } from '@/routes/admin/-schema';

@@ -16,7 +16,7 @@ import {
   DropdownMenuPositioner,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useMobile } from '@/hooks/use-mobile';
+import { useMobile } from '@/hooks/mobile';
 import { APP_NAME } from '@/lib/constants';
 
 interface LoaderData {

@@ -1,17 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useSubmit } from '@/hooks/use-submit';
+import { useSubmit } from '@/hooks/submit';
 import { MESSAGES } from '@/lib/constants';
 import type { Song } from '@/lib/types';
 import { supabase } from '@/supabase/client';
-import { type SongInput, songSchema } from './-schema';
+import type { SongInput } from './-schema';
 import SongForm from './-song-form';
 
 interface Props {
@@ -20,18 +17,8 @@ interface Props {
 }
 
 export default function EditSongModal({ onClose, song }: Props) {
-  const form = useForm({
-    defaultValues: {
-      artist: song.artist,
-      title: song.title,
-      link: song.link,
-    },
-    resolver: zodResolver(songSchema),
-  });
-
   const { onSubmit, submitting } = useSubmit({
     callbacks: [onClose],
-    handleSubmit: form.handleSubmit,
     submitFn: async (data: SongInput) => {
       const { error } = await supabase
         .from('songs')
@@ -51,7 +38,11 @@ export default function EditSongModal({ onClose, song }: Props) {
         <DialogTitle>Edit song</DialogTitle>
         <DialogDescription>Update data for featured song</DialogDescription>
       </DialogHeader>
-      <SongForm form={form} onSubmit={onSubmit} submitting={submitting} />
+      <SongForm
+        defaultValues={song}
+        onSubmit={onSubmit}
+        submitting={submitting}
+      />
     </DialogContent>
   );
 }

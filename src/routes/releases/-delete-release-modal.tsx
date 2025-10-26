@@ -6,7 +6,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { useAction } from '@/hooks/use-action';
+import { useAction } from '@/hooks/action';
 import { MESSAGES } from '@/lib/constants';
 import type { Release } from '@/lib/types';
 import { supabase } from '@/supabase/client';

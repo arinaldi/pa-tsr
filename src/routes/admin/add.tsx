@@ -1,12 +1,10 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
 
-import { useSubmit } from '@/hooks/use-submit';
+import { useSubmit } from '@/hooks/submit';
 import { MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
 import { supabase, validateSession } from '@/supabase/client';
 import AlbumForm from './-album-form';
-import { type AlbumInput, albumSchema } from './-schema';
+import type { AlbumInput } from './-schema';
 
 export const Route = createFileRoute('/admin/add')({
   beforeLoad: validateSession,
@@ -26,22 +24,8 @@ export const Route = createFileRoute('/admin/add')({
 
 function AddAlbum() {
   const navigate = useNavigate();
-  const form = useForm({
-    defaultValues: {
-      artist: '',
-      title: '',
-      year: new Date().getFullYear(),
-      studio: false,
-      cd: false,
-      wishlist: false,
-      favorite: false,
-    },
-    resolver: zodResolver(albumSchema),
-  });
-
   const { onSubmit, submitting } = useSubmit({
     callbacks: [() => navigate({ to: ROUTES_ADMIN.base.href })],
-    handleSubmit: form.handleSubmit,
     submitFn: async ({ year, ...rest }: AlbumInput) => {
       const { error } = await supabase.from('albums').insert({
         ...rest,
@@ -57,7 +41,7 @@ function AddAlbum() {
 
   return (
     <div className="max-w-sm">
-      <AlbumForm form={form} onSubmit={onSubmit} submitting={submitting} />
+      <AlbumForm onSubmit={onSubmit} submitting={submitting} />
     </div>
   );
 }

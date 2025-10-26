@@ -3,10 +3,8 @@ import { useState } from 'react';
 
 import { ROUTES_ADMIN } from '@/lib/constants';
 import { supabase } from '@/supabase/client';
-import EmailForm from './-email-form';
 import OtpForm from './-otp-form';
 import PasswordForm from './-password-form';
-import { emailSchema } from './-schema';
 
 export const Route = createFileRoute('/signin/')({
   component: Signin,
@@ -21,41 +19,17 @@ export const Route = createFileRoute('/signin/')({
   },
 });
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-
-type View = 'email' | 'password' | 'otp';
+type View = 'password' | 'otp';
 
 function Signin() {
-  const [view, setView] = useState<View>('email');
-  const form = useForm({
-    defaultValues: {
-      email: '',
-    },
-    resolver: zodResolver(emailSchema),
-  });
-  const email = form.watch('email');
-
-  function onCancel() {
-    setView('email');
-  }
-
-  if (view === 'email') {
-    return (
-      <EmailForm
-        form={form}
-        setViewOtp={() => setView('otp')}
-        setViewPassword={() => setView('password')}
-      />
-    );
-  }
+  const [view, setView] = useState<View>('password');
 
   if (view === 'password') {
-    return <PasswordForm email={email} onCancel={onCancel} />;
+    return <PasswordForm setViewOtp={() => setView('otp')} />;
   }
 
   if (view === 'otp') {
-    return <OtpForm email={email} onCancel={onCancel} />;
+    return <OtpForm onCancel={() => setView('password')} />;
   }
 
   return null;

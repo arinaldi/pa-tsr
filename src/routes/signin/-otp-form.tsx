@@ -1,6 +1,6 @@
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from '@tanstack/react-form';
 import { useNavigate } from '@tanstack/react-router';
-import { Controller, useForm } from 'react-hook-form';
+import { SendHorizontal } from 'lucide-react';
 
 import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
@@ -10,37 +10,65 @@ import {
   FieldGroup,
   FieldLabel,
 } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
 } from '@/components/ui/input-otp';
-import { useMobile } from '@/hooks/use-mobile';
-import { useSubmit } from '@/hooks/use-submit';
+import { Separator } from '@/components/ui/separator';
+import { useMobile } from '@/hooks/mobile';
+import { useSubmit } from '@/hooks/submit';
 import { EMAIL, MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
 import { supabase } from '@/supabase/client';
-import { type VerifyOtpInput, verifyOtpSchema } from './-schema';
+import {
+  type EmailInput,
+  emailSchema,
+  type VerifyOtpInput,
+  verifyOtpSchema,
+} from './-schema';
 
 interface Props {
-  email: string;
   onCancel: () => void;
 }
 
-export default function OtpForm({ email, onCancel }: Props) {
+export default function OtpForm({ onCancel }: Props) {
   const navigate = useNavigate();
   const mobile = useMobile();
-  const form = useForm({
-    defaultValues: {
-      code: '',
-    },
-    resolver: zodResolver(verifyOtpSchema),
-  });
+  const { onSubmit: onSend, submitting: sending } = useSubmit({
+    submitFn: async ({ email }: EmailInput) => {
+      if (email !== EMAIL) {
+        throw new Error(MESSAGES.ERROR);
+      }
 
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: { shouldCreateUser: false },
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    },
+    successMessage: 'Check your email for the code',
+  });
+  const emailForm = useForm({
+    defaultValues: {
+      email: '',
+    },
+    onSubmit: async ({ value }) => {
+      onSend(value);
+    },
+    validators: {
+      onSubmit: emailSchema,
+    },
+  });
   const { onSubmit, submitting } = useSubmit({
     callbacks: [() => navigate({ to: ROUTES_ADMIN.base.href })],
-    handleSubmit: form.handleSubmit,
     submitFn: async ({ code }: VerifyOtpInput) => {
+      const email = emailForm.getFieldValue('email');
+
       if (email !== EMAIL) {
         throw new Error(MESSAGES.INVALID_DATA);
       }
@@ -56,41 +84,107 @@ export default function OtpForm({ email, onCancel }: Props) {
       }
     },
   });
+  const otpForm = useForm({
+    defaultValues: {
+      code: '',
+    },
+    onSubmit: async ({ value }) => {
+      onSubmit(value);
+    },
+    validators: {
+      onSubmit: verifyOtpSchema,
+    },
+  });
 
   return (
     <div className="max-w-sm">
-      <form onSubmit={onSubmit}>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          emailForm.handleSubmit();
+        }}
+      >
         <FieldGroup>
-          <Controller
-            control={form.control}
-            name="code"
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>One-time password</FieldLabel>
-                <InputOTP
-                  {...field}
-                  aria-invalid={fieldState.invalid}
-                  id={field.name}
-                  maxLength={6}
-                >
-                  <InputOTPGroup>
-                    <InputOTPSlot index={0} />
-                    <InputOTPSlot index={1} />
-                    <InputOTPSlot index={2} />
-                  </InputOTPGroup>
-                  <InputOTPSeparator />
-                  <InputOTPGroup>
-                    <InputOTPSlot index={3} />
-                    <InputOTPSlot index={4} />
-                    <InputOTPSlot index={5} />
-                  </InputOTPGroup>
-                </InputOTP>
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />
+          <emailForm.Field name="email">
+            {(field) => {
+              const invalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+
+              return (
+                <Field data-invalid={invalid}>
+                  <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                  <Input
+                    aria-invalid={invalid}
+                    autoCapitalize="off"
+                    autoComplete="email"
+                    autoCorrect="off"
+                    autoFocus
+                    id={field.name}
+                    name={field.name}
+                    onBlur={field.handleBlur}
+                    onChange={(event) => field.handleChange(event.target.value)}
+                    type="email"
+                    value={field.state.value}
+                  />
+                  {invalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              );
+            }}
+          </emailForm.Field>
+        </FieldGroup>
+        <SubmitButton
+          className="mt-6 w-full"
+          submitting={sending}
+          variant="outline"
+        >
+          <SendHorizontal />
+          Send one-time password
+        </SubmitButton>
+      </form>
+      <Separator className="my-8" />
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          otpForm.handleSubmit();
+        }}
+      >
+        <FieldGroup>
+          <otpForm.Field name="code">
+            {(field) => {
+              const invalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
+
+              return (
+                <Field data-invalid={invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    One-time password
+                  </FieldLabel>
+                  <InputOTP
+                    aria-invalid={invalid}
+                    id={field.name}
+                    maxLength={6}
+                    name={field.name}
+                    onBlur={field.handleBlur}
+                    onChange={field.handleChange}
+                    value={field.state.value}
+                  >
+                    <InputOTPGroup>
+                      <InputOTPSlot index={0} />
+                      <InputOTPSlot index={1} />
+                      <InputOTPSlot index={2} />
+                    </InputOTPGroup>
+                    <InputOTPSeparator />
+                    <InputOTPGroup>
+                      <InputOTPSlot index={3} />
+                      <InputOTPSlot index={4} />
+                      <InputOTPSlot index={5} />
+                    </InputOTPGroup>
+                  </InputOTP>
+                  {invalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              );
+            }}
+          </otpForm.Field>
         </FieldGroup>
         <SubmitButton className="mt-6 w-full" submitting={submitting}>
           Submit

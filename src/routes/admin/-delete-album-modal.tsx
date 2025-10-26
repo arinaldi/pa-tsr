@@ -22,8 +22,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import { useAction } from '@/hooks/use-action';
-import { useMobile } from '@/hooks/use-mobile';
+import { useAction } from '@/hooks/action';
+import { useMobile } from '@/hooks/mobile';
 import { MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
 import type { Album } from '@/lib/types';
 import { supabase } from '@/supabase/client';

@@ -1,5 +1,4 @@
-import type { FormEvent } from 'react';
-import { Controller, type UseFormReturn } from 'react-hook-form';
+import { useForm } from '@tanstack/react-form';
 
 import SubmitButton from '@/components/submit-button';
 import {
@@ -10,71 +9,109 @@ import {
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import type { SongInput } from './-schema';
+import { type SongInput, songSchema } from './-schema';
 
 interface Props {
   className?: string;
-  form: UseFormReturn<SongInput>;
-  onSubmit: (event: FormEvent<Element>) => Promise<void>;
+  defaultValues?: SongInput;
+  onSubmit: (data: SongInput) => Promise<void>;
   submitting: boolean;
 }
 
 export default function SongForm({
   className,
-  form,
+  defaultValues,
   onSubmit,
   submitting,
 }: Props) {
+  const form = useForm({
+    defaultValues: defaultValues ?? {
+      artist: '',
+      title: '',
+      link: '',
+    },
+    onSubmit: async ({ value }) => {
+      onSubmit(value);
+    },
+    validators: {
+      onSubmit: songSchema,
+    },
+  });
+
   return (
-    <form className={cn('space-y-6', className)} onSubmit={onSubmit}>
+    <form
+      className={cn('space-y-6', className)}
+      onSubmit={(event) => {
+        event.preventDefault();
+        form.handleSubmit();
+      }}
+    >
       <FieldGroup>
-        <Controller
-          control={form.control}
-          name="artist"
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>Artist</FieldLabel>
-              <Input
-                {...field}
-                aria-invalid={fieldState.invalid}
-                autoFocus
-                id={field.name}
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
-        <Controller
-          control={form.control}
-          name="title"
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>Title</FieldLabel>
-              <Input
-                {...field}
-                aria-invalid={fieldState.invalid}
-                id={field.name}
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
-        <Controller
-          control={form.control}
-          name="link"
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>Link</FieldLabel>
-              <Input
-                {...field}
-                aria-invalid={fieldState.invalid}
-                id={field.name}
-                inputMode="url"
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
+        <form.Field name="artist">
+          {(field) => {
+            const invalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
+
+            return (
+              <Field data-invalid={invalid}>
+                <FieldLabel htmlFor={field.name}>Artist</FieldLabel>
+                <Input
+                  aria-invalid={invalid}
+                  autoFocus
+                  id={field.name}
+                  name={field.name}
+                  onBlur={field.handleBlur}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  value={field.state.value}
+                />
+                {invalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            );
+          }}
+        </form.Field>
+        <form.Field name="title">
+          {(field) => {
+            const invalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
+
+            return (
+              <Field data-invalid={invalid}>
+                <FieldLabel htmlFor={field.name}>Title</FieldLabel>
+                <Input
+                  aria-invalid={invalid}
+                  id={field.name}
+                  name={field.name}
+                  onBlur={field.handleBlur}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  value={field.state.value}
+                />
+                {invalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            );
+          }}
+        </form.Field>
+        <form.Field name="link">
+          {(field) => {
+            const invalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
+
+            return (
+              <Field data-invalid={invalid}>
+                <FieldLabel htmlFor={field.name}>Link</FieldLabel>
+                <Input
+                  aria-invalid={invalid}
+                  id={field.name}
+                  inputMode="url"
+                  name={field.name}
+                  onBlur={field.handleBlur}
+                  onChange={(event) => field.handleChange(event.target.value)}
+                  value={field.state.value}
+                />
+                {invalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            );
+          }}
+        </form.Field>
       </FieldGroup>
       <SubmitButton className="w-full sm:w-auto" submitting={submitting}>
         Save

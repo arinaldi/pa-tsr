@@ -3,7 +3,7 @@ import { Reorder } from 'framer-motion';
 import { type FormEvent, useState } from 'react';
 
 import SubmitButton from '@/components/submit-button';
-import { useSubmit } from '@/hooks/use-submit';
+import { useSubmit } from '@/hooks/submit';
 import { ROUTE_HREF } from '@/lib/constants';
 import { supabase, validateSession } from '@/supabase/client';
 import { getRankingsByYear } from '@/supabase/data';

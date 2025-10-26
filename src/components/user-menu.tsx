@@ -136,7 +136,7 @@ export default function UserMenu() {
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
               {session ? (
-                <DropdownMenuItem onSelect={signOut}>
+                <DropdownMenuItem onClick={signOut}>
                   <LogOut />
                   Sign out
                 </DropdownMenuItem>
