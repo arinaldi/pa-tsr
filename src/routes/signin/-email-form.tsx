@@ -1,16 +1,14 @@
 import { Lock, SendHorizontal } from 'lucide-react';
-import type { UseFormReturn } from 'react-hook-form';
+import { Controller, type UseFormReturn } from 'react-hook-form';
 
 import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { useMobile } from '@/hooks/use-mobile';
 import { useSubmit } from '@/hooks/use-submit';
@@ -52,38 +50,40 @@ export default function EmailForm({
 
   return (
     <div className="max-w-sm">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(setViewPassword)}>
-          <FormField
+      <form onSubmit={form.handleSubmit(setViewPassword)}>
+        <FieldGroup>
+          <Controller
             control={form.control}
             name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    autoCapitalize="none"
-                    autoComplete="email"
-                    autoCorrect="off"
-                    autoFocus
-                    type="email"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                <Input
+                  {...field}
+                  aria-invalid={fieldState.invalid}
+                  autoCapitalize="off"
+                  autoComplete="email"
+                  autoCorrect="off"
+                  autoFocus
+                  id={field.name}
+                  type="email"
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
             )}
           />
-          <Button
-            className="mt-6 w-full"
-            size={mobile ? 'lg' : 'default'}
-            type="submit"
-          >
-            <Lock className="mr-2 size-4" />
-            Sign in with password
-          </Button>
-        </form>
-      </Form>
+        </FieldGroup>
+        <Button
+          className="mt-6 w-full"
+          size={mobile ? 'lg' : 'default'}
+          type="submit"
+        >
+          <Lock className="mr-2 size-4" />
+          Sign in with password
+        </Button>
+      </form>
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
@@ -94,18 +94,16 @@ export default function EmailForm({
           </span>
         </div>
       </div>
-      <Form {...form}>
-        <form onSubmit={onSubmit}>
-          <SubmitButton
-            className="w-full"
-            submitting={submitting}
-            variant="outline"
-          >
-            <SendHorizontal className="size-4" />
-            Send one-time password
-          </SubmitButton>
-        </form>
-      </Form>
+      <form onSubmit={onSubmit}>
+        <SubmitButton
+          className="w-full"
+          submitting={submitting}
+          variant="outline"
+        >
+          <SendHorizontal className="size-4" />
+          Send one-time password
+        </SubmitButton>
+      </form>
     </div>
   );
 }

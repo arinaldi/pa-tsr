@@ -1,17 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field';
 import {
   InputOTP,
   InputOTPGroup,
@@ -61,38 +59,43 @@ export default function OtpForm({ email, onCancel }: Props) {
 
   return (
     <div className="max-w-sm">
-      <Form {...form}>
-        <form onSubmit={onSubmit}>
-          <FormField
+      <form onSubmit={onSubmit}>
+        <FieldGroup>
+          <Controller
             control={form.control}
             name="code"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>One-time password</FormLabel>
-                <FormControl>
-                  <InputOTP maxLength={6} {...field}>
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                    </InputOTPGroup>
-                    <InputOTPSeparator />
-                    <InputOTPGroup>
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
-                    </InputOTPGroup>
-                  </InputOTP>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={field.name}>One-time password</FieldLabel>
+                <InputOTP
+                  {...field}
+                  aria-invalid={fieldState.invalid}
+                  id={field.name}
+                  maxLength={6}
+                >
+                  <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                  </InputOTPGroup>
+                  <InputOTPSeparator />
+                  <InputOTPGroup>
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                  </InputOTPGroup>
+                </InputOTP>
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
             )}
           />
-          <SubmitButton className="mt-6 w-full" submitting={submitting}>
-            Submit
-          </SubmitButton>
-        </form>
-      </Form>
+        </FieldGroup>
+        <SubmitButton className="mt-6 w-full" submitting={submitting}>
+          Submit
+        </SubmitButton>
+      </form>
       <Button
         className="mt-2 w-full"
         onClick={onCancel}

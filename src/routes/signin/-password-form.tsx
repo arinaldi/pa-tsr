@@ -1,18 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from '@tanstack/react-router';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import PasswordInput from '@/components/password-input';
 import SubmitButton from '@/components/submit-button';
 import { Button } from '@/components/ui/button';
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field';
 import { useMobile } from '@/hooks/use-mobile';
 import { useSubmit } from '@/hooks/use-submit';
 import { EMAIL, MESSAGES, ROUTES_ADMIN } from '@/lib/constants';
@@ -55,26 +53,31 @@ export default function PasswordForm({ email, onCancel }: Props) {
 
   return (
     <div className="max-w-sm">
-      <Form {...form}>
-        <form onSubmit={onSubmit}>
-          <FormField
+      <form onSubmit={onSubmit}>
+        <FieldGroup>
+          <Controller
             control={form.control}
             name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <PasswordInput autoFocus {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+                <PasswordInput
+                  {...field}
+                  aria-invalid={fieldState.invalid}
+                  autoFocus
+                  id={field.name}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
             )}
           />
-          <SubmitButton className="mt-6 w-full" submitting={submitting}>
-            Submit
-          </SubmitButton>
-        </form>
-      </Form>
+        </FieldGroup>
+        <SubmitButton className="mt-6 w-full" submitting={submitting}>
+          Submit
+        </SubmitButton>
+      </form>
       <Button
         className="mt-2 w-full"
         onClick={onCancel}
