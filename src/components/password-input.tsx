@@ -1,29 +1,30 @@
 import { Eye, EyeOff } from 'lucide-react';
 import { useReducer } from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@/components/ui/input-group';
 
-const PasswordInput = (props: React.ComponentProps<'input'>) => {
+export default function PasswordInput(props: React.ComponentProps<'input'>) {
   const [on, toggle] = useReducer((flag) => !flag, false);
 
   return (
-    <div className="relative">
-      <Input className="pr-10" type={on ? 'text' : 'password'} {...props} />
-      <Button
-        aria-label="Show or hide password"
-        className="absolute inset-y-0 right-0 mr-0.5 flex cursor-pointer items-center"
-        size="icon"
-        onClick={toggle}
-        type="button"
-        variant="ghost"
-      >
-        {on ? <Eye className="size-4" /> : <EyeOff className="size-4" />}
-      </Button>
-    </div>
+    <InputGroup>
+      <InputGroupInput type={on ? 'text' : 'password'} {...props} />
+      <InputGroupAddon align="inline-end">
+        <InputGroupButton
+          aria-label="Show or hide password"
+          onClick={toggle}
+          size="icon-sm"
+          title="Show or hide password"
+          type="button"
+        >
+          {on ? <Eye /> : <EyeOff />}
+        </InputGroupButton>
+      </InputGroupAddon>
+    </InputGroup>
   );
-};
-
-PasswordInput.displayName = 'PasswordInput';
-
-export default PasswordInput;
+}

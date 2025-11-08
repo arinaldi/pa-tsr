@@ -1,22 +1,27 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { Search, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 
-import InputClearButton from '@/components/input-clear-button';
-import InputSpinner from '@/components/input-spinner';
 import { useSession } from '@/components/session-provider';
+import Spinner from '@/components/spinner';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@/components/ui/input-group';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { MESSAGES } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { getArtists } from '@/supabase/data';
 import {
-  type Result,
   getAccessToken,
   getArtistAlbums,
   getArtistId,
+  type Result,
   sortByDateDesc,
 } from './-helpers';
 import Random from './-random';
@@ -99,8 +104,8 @@ function Artists() {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8">
       <div className="flex shrink-0 flex-col gap-4">
-        <div className="relative">
-          <Input
+        <InputGroup>
+          <InputGroupInput
             autoFocus
             name="artists"
             onChange={(e) => setSearch(e.target.value)}
@@ -108,16 +113,27 @@ function Artists() {
             ref={searchRef}
             value={search}
           />
+          <InputGroupAddon>
+            <Search />
+          </InputGroupAddon>
           {!fetching && search && (
-            <InputClearButton
-              onClick={() => {
-                setSearch('');
-                searchRef?.current?.focus();
-              }}
-            />
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton
+                onClick={() => {
+                  setSearch('');
+                  searchRef?.current?.focus();
+                }}
+              >
+                <X />
+              </InputGroupButton>
+            </InputGroupAddon>
           )}
-          {fetching && <InputSpinner />}
-        </div>
+          {fetching && (
+            <InputGroupAddon align="inline-end">
+              <Spinner className="size-4" />
+            </InputGroupAddon>
+          )}
+        </InputGroup>
         <ScrollArea className="max-h-[400px] rounded-md border sm:max-h-[800px]">
           <div className="p-4">
             {filteredArtists.map((a, index) => {

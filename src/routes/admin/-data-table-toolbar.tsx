@@ -1,10 +1,14 @@
 import type { Table } from '@tanstack/react-table';
-import { X } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 import { useRef } from 'react';
 
-import InputClearButton from '@/components/input-clear-button';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@/components/ui/input-group';
 import { options } from './-data';
 import { DataTableFacetedFilter } from './-data-table-faceted-filter';
 import { DataTableViewOptions } from './-data-table-view-options';
@@ -44,8 +48,8 @@ export function DataTableToolbar<TData>({ table }: Props<TData>) {
 
   return (
     <div className="flex flex-col gap-2 md:flex-row md:items-center">
-      <div className="relative">
-        <Input
+      <InputGroup className="md:w-56">
+        <InputGroupInput
           autoFocus
           name="search"
           onChange={onSearch}
@@ -53,8 +57,22 @@ export function DataTableToolbar<TData>({ table }: Props<TData>) {
           ref={inputRef}
           value={value}
         />
-        {value && <InputClearButton onClick={onClear} />}
-      </div>
+        <InputGroupAddon>
+          <Search />
+        </InputGroupAddon>
+        {value && (
+          <InputGroupAddon align="inline-end">
+            <InputGroupButton
+              aria-label="Clear search"
+              onClick={onClear}
+              size="icon-sm"
+              title="Clear search"
+            >
+              <X />
+            </InputGroupButton>
+          </InputGroupAddon>
+        )}
+      </InputGroup>
       <div className="flex flex-wrap items-center gap-2">
         {table.getColumn('cd') && (
           <DataTableFacetedFilter

@@ -1,4 +1,5 @@
 import { useNavigate } from '@tanstack/react-router';
+import { SearchIcon, X } from 'lucide-react';
 import {
   type ChangeEvent,
   type ComponentProps,
@@ -7,9 +8,13 @@ import {
   useTransition,
 } from 'react';
 
-import InputClearButton from '@/components/input-clear-button';
-import InputSpinner from '@/components/input-spinner';
-import { Input } from '@/components/ui/input';
+import Spinner from '@/components/spinner';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@/components/ui/input-group';
 import { DEBOUNCE_IN_MS } from '@/lib/constants';
 import { Route } from './edit';
 
@@ -57,8 +62,8 @@ export default function Search(props: ComponentProps<'input'>) {
   }
 
   return (
-    <div className="relative">
-      <Input
+    <InputGroup>
+      <InputGroupInput
         defaultValue={defaultValue}
         name="search"
         onChange={onSearch}
@@ -66,8 +71,21 @@ export default function Search(props: ComponentProps<'input'>) {
         ref={inputRef}
         {...props}
       />
-      {!searching && defaultValue && <InputClearButton onClick={onClear} />}
-      {searching && <InputSpinner />}
-    </div>
+      <InputGroupAddon>
+        <SearchIcon />
+      </InputGroupAddon>
+      {!searching && defaultValue && (
+        <InputGroupAddon align="inline-end">
+          <InputGroupButton onClick={onClear}>
+            <X />
+          </InputGroupButton>
+        </InputGroupAddon>
+      )}
+      {searching && (
+        <InputGroupAddon align="inline-end">
+          <Spinner className="size-4" />
+        </InputGroupAddon>
+      )}
+    </InputGroup>
   );
 }
