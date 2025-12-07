@@ -33,7 +33,7 @@ export default function MenuLink({ route }: Props) {
         isActive={active}
         render={
           <Link onClick={closeMobile} to={href}>
-            {({ isActive }) => (
+            {({ isActive }: { isActive: boolean }) => (
               <>
                 <route.icon
                   className={cn(
@@ -65,7 +65,7 @@ export default function MenuLink({ route }: Props) {
                   isActive={subActive}
                   render={
                     <Link onClick={closeMobile} to={item.href}>
-                      {({ isActive }) => (
+                      {({ isActive }: { isActive: boolean }) => (
                         <span
                           className={cn(
                             isActive ? 'font-medium' : 'text-muted-foreground',

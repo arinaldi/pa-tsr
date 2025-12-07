@@ -12,7 +12,7 @@ export const Route = createFileRoute('/signin/')({
     const { data } = await supabase.auth.getClaims();
 
     if (data) {
-      return redirect({ to: ROUTES_ADMIN.base.href });
+      throw redirect({ to: ROUTES_ADMIN.base.href });
     }
 
     return { title: 'Sign in' };
